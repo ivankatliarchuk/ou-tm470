@@ -1,0 +1,51 @@
+{
+     "$schema": "http://json-schema.org/draft-06/schema#",
+     "title": "ServiceEntry",
+     "description": "A service entry on a vehicle representing activities
+            performed on a vehicle, by an organisation encompassing
+            a specific activity ",
+     "type": "object",
+     "properties": {
+       "id": {
+         "description": "The unique identifier for this service event",
+         "type": "string",
+       },
+       "eventDescription": {
+         "description": "The activities and millage of the service or activity",
+         "type": "object",
+         "properties": {
+           "vehicleMilage": {
+             "description": "Vehicle milage",
+             "type": "integer"
+           },
+           "eventItems": {
+             "description": "Activities performed at the service event",
+             "type": "array",
+             "items": {
+               "type": "object" {
+                 "properties": {
+                   "id": {"type": "integer"},
+                   "activityTypeDescription": {"type": "string"}
+                 }
+               }
+             }
+           }
+         }
+       },
+       "vehicle": {
+         "description": "Vehicle actitivities are performed on",
+         "type": "object",
+         "propoerties": {
+           ...
+         }
+       },
+       "garage": {
+         "description": "The facility performing the work",
+         "type": "object",
+         "properties": {
+           ...
+         }
+       }
+     },
+     "required": ["id", "eventDescription", "vehicle", "garage"]
+}
