@@ -35,7 +35,7 @@
        "vehicle": {
          "description": "Vehicle actitivities have been performed on",
          "type": "object",
-         "propoerties": {
+         "properties": {
            ...
          }
        },
