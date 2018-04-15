@@ -2,7 +2,7 @@
      "$schema": "http://json-schema.org/draft-06/schema#",
      "title": "ServiceEntry",
      "description": "A service entry on a vehicle representing activities
-            performed on a vehicle, by an organisation encompassing
+            performed on a vehicle, by an organisation and encompassing
             a specific activity ",
      "type": "object",
      "properties": {
