@@ -33,7 +33,7 @@
          }
        },
        "vehicle": {
-         "description": "Vehicle actitivities are performed on",
+         "description": "Vehicle actitivities have been performed on",
          "type": "object",
          "propoerties": {
            ...
