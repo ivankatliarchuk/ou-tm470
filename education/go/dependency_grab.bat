@@ -11,6 +11,6 @@ go get github.com/joho/godotenv
 
 # creates the port environment file
 touch blockchain.env
-echo "ADDR=8080" > blockchain.env
+echo ADDR=8080 > .env
 
 echo "All Done!"
