@@ -25,11 +25,11 @@ touch ./ca/intca/db/intca.db.attr
 
 
 # Make the root CA
-echo "...Generating root CA (i.e. controlling entity), put in passcode when prompted" > /dev/stdout
+echo "...Generating root CA key and certificate (i.e. validating entity)" > /dev/stdout
 openssl genrsa -aes256 -out rootca.key 4096
 openssl req -config root_ca.conf -sha256 -new -x509 -days 3650 -key rootca.key -out rootca.crt
 
-echo "...Generating Intermediate CA (i.e. delegated authority)" > /dev/stdout
+echo "...Generating Intermediate CA key and certificate request (i.e. delegated authority)" > /dev/stdout
 openssl genrsa -out intca.key 2048
 openssl req -new -config root_ca.conf -sha256 -key intca.key -out intca.csr
 
