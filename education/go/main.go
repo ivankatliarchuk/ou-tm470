@@ -9,6 +9,7 @@ import (
 	"os"
   "net/http"
 	"time"
+	"fmt"
 
   "github.com/davecgh/go-spew/spew"
 	"github.com/gorilla/mux"
@@ -52,7 +53,7 @@ func generateBlock(oldBlock Block, newPayload string) (Block, error) {
 	newBlock.PrevHash = oldBlock.Hash
 	newBlock.Hash = calculateHash(newBlock)
 
-	return newBlock, nil
+  return newBlock, nil
 }
 
 // Generate the Genesis Block
@@ -63,7 +64,7 @@ func generateGenesisBlock(){
 
   genesis.Index = 0
   genesis.Timestamp = t.String()
-  genesis.Payload = ""
+  genesis.Payload = "payload"
   genesis.PrevHash = ""
   genesis.Hash = ""
 
