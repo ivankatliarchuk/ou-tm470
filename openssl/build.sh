@@ -1,5 +1,7 @@
 #!/bin/sh
 
+clear
+
 # Remove all the old stuff
 rm -rf ./ca 1>/dev/stdout 2>/dev/stderr
 

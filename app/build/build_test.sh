@@ -41,7 +41,3 @@ mv ./intca.key ./ca/intca/private/
 echo "...Sign the request for the delegated authority" > /dev/stdout
 openssl ca -batch -config root_ca.conf -notext -in intca.csr -out ./ca/intca.crt
 openssl ca -config root_ca.conf -gencrl -keyfile ./ca/rootca/private/rootca.key -cert ./ca/rootca.crt -out rootca.crl.pem
-
-echo "...Text output for the certificates" > /dev/stdout
-openssl x509 -noout -text -in ./ca/rootca.crt > rootca.about.txt
-openssl x509 -noout -text -in ./ca/intca.crt > intca.about.txt

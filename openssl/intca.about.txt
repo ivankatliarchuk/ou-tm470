@@ -1,0 +1,72 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 4096 (0x1000)
+        Signature Algorithm: sha256WithRSAEncryption
+        Issuer: DC=open.ac.uk, DC=md5589, O=md5589@open.ac.uk, OU=TM470 Project, CN=ca.tm470.md5589.open.ac.uk
+        Validity
+            Not Before: Jul  4 19:54:27 2018 GMT
+            Not After : Jul  3 19:54:27 2028 GMT
+        Subject: DC=open.ac.uk, DC=md5589, O=md5589@open.ac.uk, OU=TM470 Project, CN=intermediate_ca.tm470.md5589.open.ac.uk
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+            RSA Public Key: (2048 bit)
+                Modulus (2048 bit):
+                    00:d4:af:72:a0:9e:a8:85:d0:48:b7:3c:de:18:75:
+                    3e:7e:38:be:91:c6:02:a0:cb:34:b0:45:01:13:be:
+                    9b:50:5c:0d:e1:77:e1:8d:14:30:3a:18:d1:b2:a5:
+                    7e:f0:83:48:e5:60:2a:c0:68:d0:39:fb:0e:ad:66:
+                    41:8e:9b:e7:92:90:cc:19:5f:61:91:ab:97:7e:b1:
+                    dd:08:0a:da:5d:f2:94:04:33:c2:9b:09:a4:fc:55:
+                    6e:c3:ad:db:5b:fe:e8:ce:01:ca:ff:50:f3:66:64:
+                    f4:6b:c5:42:85:74:14:10:02:19:ab:5e:a7:69:e3:
+                    db:a4:84:20:f1:a5:dc:d6:f6:ba:dc:1a:2a:18:8a:
+                    0f:63:ea:02:63:76:a7:5a:e6:cf:0b:60:60:51:09:
+                    2b:b1:b0:b1:ef:bc:78:6a:0a:b6:52:86:c5:19:74:
+                    51:06:6f:fe:63:9a:82:cf:f0:33:f8:4c:5a:f4:05:
+                    29:dc:77:db:3e:2f:e5:c0:69:64:c5:8f:91:d0:d3:
+                    57:96:39:9c:cb:5d:0d:92:de:30:9f:7e:8f:f4:6f:
+                    3d:31:73:d8:f1:cf:c6:29:28:30:94:af:87:9e:58:
+                    a3:21:c9:41:a3:6e:ee:b2:b5:2e:ac:98:77:72:13:
+                    3e:f8:e4:ba:1f:3f:d3:98:03:17:14:a5:23:a9:e9:
+                    46:3d
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Key Usage: critical
+                Certificate Sign, CRL Sign
+            X509v3 Basic Constraints: critical
+                CA:TRUE, pathlen:0
+            X509v3 Subject Key Identifier: 
+                D4:5C:21:65:DF:43:72:98:36:A9:08:4B:D7:B4:54:C7:03:A5:41:C4
+            X509v3 Subject Alternative Name: 
+                email:md5589@open.ac.uk, DNS:*.md5589.open.ac.uk, DNS:md5589.open.ac.uk, DNS:localhost
+    Signature Algorithm: sha256WithRSAEncryption
+        ad:69:f9:80:b2:99:11:8e:ad:bb:79:8e:63:97:30:f5:50:1c:
+        17:a1:df:d6:05:5e:a9:b0:1a:dc:93:24:30:6d:17:93:49:8c:
+        29:92:a9:28:d0:5b:49:e0:49:e7:fe:52:26:bc:d6:7a:de:fb:
+        cc:e2:87:e7:29:2d:8a:77:b5:a3:79:04:24:f8:d8:59:94:ea:
+        93:72:ca:8a:f7:ad:2b:72:9c:46:08:7f:e5:4e:98:65:bf:1f:
+        ff:c8:83:80:bc:2d:b4:92:9f:d4:8f:67:7d:a2:3f:ff:39:46:
+        60:c9:d6:61:88:10:85:4b:75:d0:17:fe:07:26:89:37:c3:26:
+        90:68:d7:b0:24:fd:6c:09:c5:61:46:81:e0:4f:7d:95:8c:90:
+        76:c3:96:39:17:cc:57:f3:fe:f3:d1:c4:be:3e:f8:26:b2:05:
+        42:8d:8d:f6:23:ab:ce:fc:04:e4:40:a2:4b:64:f9:3f:3f:e5:
+        6c:41:b2:2d:5a:fc:38:64:c7:2a:f2:04:47:b5:3d:2b:02:cd:
+        f7:31:68:3e:7b:3b:39:b8:55:23:69:0c:9c:20:98:18:6e:aa:
+        bb:2d:c0:1a:62:06:7f:4d:5c:40:72:ce:7c:4c:d6:58:2b:b1:
+        df:f8:4b:47:05:05:43:24:43:a1:1a:46:44:df:19:b6:9a:e2:
+        26:06:87:f8:43:af:cb:03:16:0f:57:c8:d7:2a:ae:6e:af:29:
+        3c:f5:3e:35:3c:14:a9:7f:ba:a2:15:2c:40:0d:91:eb:3a:c6:
+        49:83:ea:b4:b4:cd:b9:c5:13:21:ac:f6:9c:b9:80:61:07:59:
+        be:b9:a0:a8:9b:7f:29:e4:17:92:65:08:69:0e:c0:c0:21:c6:
+        6d:5a:d2:2b:48:ab:76:a6:a6:41:64:3e:7f:09:f6:f6:83:73:
+        8b:0a:f2:7c:0f:87:97:e5:62:e8:df:88:1f:2a:4e:72:eb:89:
+        f6:0c:9c:e3:ef:48:aa:7c:05:eb:bb:f1:97:4d:5e:84:ab:a3:
+        21:d6:c8:81:51:ad:9c:36:ef:31:13:ef:25:c6:e7:c7:c1:fa:
+        20:d8:6e:5f:09:2d:69:0b:41:35:1d:1b:14:fe:41:f8:0e:6d:
+        7b:b1:c6:f2:7a:68:96:41:bf:1a:a1:47:5d:f3:a4:6e:86:d4:
+        51:71:b8:a9:a9:c5:07:cd:cf:f5:de:1a:3f:aa:d6:d2:56:93:
+        6c:c6:aa:c6:aa:e4:ff:3f:4f:d6:2e:69:f8:b5:22:d2:50:8c:
+        22:f6:e0:31:41:07:67:b0:d1:46:a7:43:f7:ec:ea:e7:4e:14:
+        4d:ac:55:c9:4b:68:89:8b:ea:90:34:64:fd:8c:c2:a9:39:bc:
+        7d:11:47:df:bb:fe:85:e3
