@@ -60,13 +60,14 @@ func Load(path string, structOut interface{}) error {
 	defer lock.Unlock()
 
 	fileOut, err := os.Open(path)
+
+	if os.IsNotExist(err) { // Check if it does not exist or if it is a real error
+		log.Println("INFO: dataPersist.Load(): File does not exist.")
+		return nil
+	}
+
 	if err != nil {
 		log.Println("INFO: dataPersist.Load()" + err.Error() + " while openning file " + fileOut.Name())
-
-		if os.IsNotExist(err) { // Check if it does not exist or if it is a real error
-			log.Println("INFO: dataPersist.Load(): File does not exist.")
-			return nil
-		}
 		return err
 	}
 
