@@ -43,7 +43,7 @@ func main() {
 }
 
 func loadBlockchain() error {
-	err := dataPersist.Load(persistentFilename, Blockchain)
+	err := dataPersist.Load(persistentFilename, &Blockchain)
 	if err != nil {
 		// Problem with lack of data file, lets create a genesis and return err
 		log.Println("INFO: loadBlockchain(): Loading blockchain failed, generating Genesis.  " + err.Error())
