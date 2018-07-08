@@ -37,22 +37,24 @@ func main() {
 		log.Fatal(err)
 	}
 
-	log.Println("INFO: main(): Starting web server...") // Web Server for blockchain interaction
+	log.Println("INFO: serviceChain.main(): Starting web server...") // Web Server for blockchain interaction
 	web.ServerStart("8000")
 }
 
 func loadBlockchain() error {
-	if err := dataPersist.Load(persistentFilename, blockchain); err != nil {
+	err := dataPersist.Load(persistentFilename, blockchain)
+	/* if err != nil {
 		// Problem with lack of data file, lets create a genesis and return err
 		log.Println("INFO: loadBlockchain(): Loading blockchain failed, generating Genesis.")
 		blockchain = append(blockchain, generateGenesisBlock())
 		return err
 	}
-	return nil
+	*/
+	return err
 }
 
 func saveBlockchain() error {
-	log.Println("INFO: saveBlockchain(): Persisting blockchain as " + persistentFilename)
+	log.Println("INFO: serviceChain.saveBlockchain(): Persisting blockchain as " + persistentFilename)
 	return dataPersist.Save(persistentFilename, blockchain)
 }
 

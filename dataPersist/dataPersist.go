@@ -4,7 +4,6 @@ package dataPersist
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"io"
 	"log"
 	"os"
@@ -61,10 +60,9 @@ func Load(path string, structOut interface{}) error {
 
 	fileOut, err := os.Open(path)
 	if err != nil {
-		log.Println("INFO: " + err.Error() + " while openning file " + fileOut.Name())
+		log.Println("INFO: dataPersist.Load()" + err.Error() + " while openning file " + fileOut.Name())
 		return err
 	}
 	defer fileOut.Close()
-	fmt.Println(fileOut.Name())
 	return Unmarshal(fileOut, structOut)
 }
