@@ -53,6 +53,8 @@ func loadBlockchain() error {
 		log.Println("INFO: serviceChain.loadBlockchain(): Created genesis and added to blockchain, now of size " + blockChainSize)
 		return nil
 	}
+	blockChainSize := strconv.Itoa(len(Blockchain))
+	log.Println("INFO: serviceChain.loadBlockchain(): Loaded blockchain, total records = " + blockChainSize)
 	return nil
 }
 
