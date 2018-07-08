@@ -9,7 +9,7 @@ import (
 	"github.com/mmd93ee/ou-tm470/web"
 )
 
-var blockchain []Block                         // Core Blockchain
+var Blockchain []Block                         // Core Blockchain
 var index int                                  // Block Index
 var persistentFilename = "./md5589_blockchain" // What to persist the blockchain to disk as
 
@@ -31,10 +31,10 @@ type ServiceRecord struct {
 
 func main() {
 	if err := loadBlockchain(); err != nil {
-		log.Fatal(err)
+		log.Fatalln(err)
 	}
 	if err := saveBlockchain(); err != nil {
-		log.Fatal(err)
+		log.Fatalln(err)
 	}
 
 	log.Println("INFO: serviceChain.main(): Starting web server...") // Web Server for blockchain interaction
@@ -42,19 +42,20 @@ func main() {
 }
 
 func loadBlockchain() error {
-	err := dataPersist.Load(persistentFilename, blockchain)
+	err := dataPersist.Load(persistentFilename, Blockchain)
 	if err != nil {
 		// Problem with lack of data file, lets create a genesis and return err
 		log.Println("INFO: loadBlockchain(): Loading blockchain failed, generating Genesis.  " + err.Error())
-		blockchain = append(blockchain, generateGenesisBlock())
-		return err
+		Blockchain := append(Blockchain, generateGenesisBlock())
+		log.Println("Created initial blockchain " + Blockchain)
+		return nil
 	}
 	return nil
 }
 
 func saveBlockchain() error {
 	log.Println("INFO: serviceChain.saveBlockchain(): Persisting blockchain as " + persistentFilename)
-	return dataPersist.Save(persistentFilename, blockchain)
+	return dataPersist.Save(persistentFilename, Blockchain)
 }
 
 // generateGenesisBlock will create the first block
