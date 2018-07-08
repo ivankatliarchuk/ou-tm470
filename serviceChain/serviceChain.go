@@ -2,6 +2,7 @@
 package main
 
 import (
+	"encoding/json"
 	"log"
 	"strconv"
 	"time"
@@ -49,7 +50,7 @@ func loadBlockchain() error {
 		log.Println("INFO: loadBlockchain(): Loading blockchain failed, generating Genesis.  " + err.Error())
 		Blockchain := append(Blockchain, generateGenesisBlock())
 		blockChainSize := strconv.Itoa(len(Blockchain))
-		log.Println("Created initial blockchain of size " + blockChainSize)
+		log.Println("INFO: serviceChain.loadBlockchain(): Created genesis and added to blockchain, now of size " + blockChainSize)
 		return nil
 	}
 	return nil
@@ -74,6 +75,10 @@ func generateGenesisBlock() Block {
 	genesisRecord.Identifier = 0
 	genesisRecord.Data = "seeded data"
 	genesisBlock.Record = genesisRecord
+
+	blockString, err := json.MarshalIndent(genesisBlock, "", "/t")
+
+	log.Println("INFO: serviceChain.generateGenesisBlock(): Created block with contents: " + dataPersist.StructToJsonString(genesisBlock))
 
 	return genesisBlock
 }
