@@ -75,8 +75,8 @@ func Load(path string, structOut interface{}) error {
 	return Unmarshal(fileOut, structOut)
 }
 
-// StructToJsonString converts an interface into a JSON formated string
-func StructToJsonString(data interface{}) {
+// StructToJSONString converts an interface into a JSON formated string
+func StructToJSONString(data interface{}) {
 
 	var out io.Writer
 	encoder := json.NewEncoder(out)
