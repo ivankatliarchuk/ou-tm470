@@ -48,7 +48,7 @@ func loadBlockchain() error {
 	if err != nil {
 		// Problem with lack of data file, lets create a genesis and return err
 		log.Println("INFO: loadBlockchain(): Loading blockchain failed, generating Genesis.  " + err.Error())
-		Blockchain := append(Blockchain, generateGenesisBlock())
+		Blockchain = append(Blockchain, generateGenesisBlock())
 		blockChainSize := strconv.Itoa(len(Blockchain))
 		log.Println("INFO: serviceChain.loadBlockchain(): Created genesis and added to blockchain, now of size " + blockChainSize)
 		return nil
@@ -76,7 +76,7 @@ func generateGenesisBlock() Block {
 	genesisRecord.Data = "seeded data"
 	genesisBlock.Record = genesisRecord
 
-	blockString, err := json.MarshalIndent(genesisBlock, "", "/t")
+	blockString, err := json.MarshalIndent(genesisBlock, "", "\t")
 	if err != nil {
 		log.Println("INFO: serviceChain.createGenesisBlock(): Problem creating the JSON output of the genesis block.  Continuing...")
 	}
