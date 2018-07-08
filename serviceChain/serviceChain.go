@@ -3,6 +3,7 @@ package main
 
 import (
 	"log"
+	"strconv"
 	"time"
 
 	"github.com/mmd93ee/ou-tm470/dataPersist"
@@ -47,7 +48,8 @@ func loadBlockchain() error {
 		// Problem with lack of data file, lets create a genesis and return err
 		log.Println("INFO: loadBlockchain(): Loading blockchain failed, generating Genesis.  " + err.Error())
 		Blockchain := append(Blockchain, generateGenesisBlock())
-		log.Println("Created initial blockchain " + Blockchain)
+		blockChainSize := strconv.Itoa(len(Blockchain))
+		log.Println("Created initial blockchain of size " + blockChainSize)
 		return nil
 	}
 	return nil
