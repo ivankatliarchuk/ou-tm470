@@ -1,15 +1,10 @@
 // Core application for Service Record Blockchain
 package main
 
-import (
-  "github.com/mmd93ee/ou-tm470/app/web"
-)
+var blockchain []Block         // Core Blockchain
+var serviceEntryIdentifier int // Service Entry ID value
 
-var Blockchain []Block         // Core Blockchain
-var ServiceEntryIdentifier int // Service Entry ID value
-var WebServer serviceChain/web              // Web server for application entry point
-
-// Core block for service chain
+// Block struct service chain
 type Block struct {
 	Index     int
 	Timestamp string
@@ -19,13 +14,14 @@ type Block struct {
 	Record ServiceRecord
 }
 
-// A struct to represent the service record data itself
+// ServiceRecord to represent the service record data itself
 type ServiceRecord struct {
 	Identifier int
 	Data       string // PLACEHOLDER FOR DATA MODEL ENTRIES
 }
 
 func main() {
+	server := webServer // Web Server for blockchain interaction
 
 }
 
