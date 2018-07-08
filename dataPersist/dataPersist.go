@@ -24,6 +24,7 @@ var Marshal = func(structIn interface{}) (io.Reader, error) {
 
 // Unmarshal interface for converting file to struct
 var Unmarshal = func(reader io.Reader, structIn interface{}) error {
+	log.Println("This far??")
 	return json.NewDecoder(reader).Decode(structIn)
 }
 
