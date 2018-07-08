@@ -9,9 +9,9 @@ import (
 	"github.com/mmd93ee/ou-tm470/web"
 )
 
-var blockchain []Block                       // Core Blockchain
-var Index int                                // Block Index
-var persistentFilename = "md5589_blockchain" // What to persist the blockchain to disk as
+var blockchain []Block                         // Core Blockchain
+var index int                                  // Block Index
+var persistentFilename = "./md5589_blockchain" // What to persist the blockchain to disk as
 
 // Block struct service chain
 type Block struct {

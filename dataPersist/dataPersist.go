@@ -64,5 +64,6 @@ func Load(path string, structOut interface{}) error {
 		return err
 	}
 	defer fileOut.Close()
+	fmt.Println(fileOut.Name())
 	return Unmarshal(fileOut, structOut)
 }
