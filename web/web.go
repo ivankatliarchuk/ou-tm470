@@ -1,5 +1,5 @@
 // Package web used to create a Web Server to place Handler logic
-package web
+package main
 
 import (
 	"fmt"

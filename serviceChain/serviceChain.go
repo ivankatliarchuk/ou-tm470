@@ -2,7 +2,7 @@
 package main
 
 import (
-  "github.com/mmd93ee/ou-tm470/app/serviceChain/web"
+  "github.com/mmd93ee/ou-tm470/app/web"
 )
 
 var Blockchain []Block         // Core Blockchain
