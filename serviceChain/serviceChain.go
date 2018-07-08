@@ -1,9 +1,13 @@
 // Core application for Service Record Blockchain
 package main
 
+import (
+  "github.com/mmd93ee/ou-tm470/app/serviceChain/web"
+)
+
 var Blockchain []Block         // Core Blockchain
 var ServiceEntryIdentifier int // Service Entry ID value
-var WebServer web              // Web server for application entry point
+var WebServer serviceChain/web              // Web server for application entry point
 
 // Core block for service chain
 type Block struct {
