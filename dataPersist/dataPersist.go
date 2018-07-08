@@ -4,6 +4,7 @@ package dataPersist
 import (
 	"bytes"
 	"encoding/json"
+	"fmt"
 	"io"
 	"os"
 	"sync"
@@ -59,6 +60,7 @@ func Load(path string, structOut interface{}) error {
 
 	fileOut, err := os.Open(path)
 	if err != nil {
+		fmt.Println("Error: " + err.Error() + " while openning file " + fileOut.Name())
 		return err
 	}
 	defer fileOut.Close()

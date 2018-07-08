@@ -3,7 +3,6 @@ package web
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 	"strings"
 )
@@ -11,21 +10,19 @@ import (
 var defaultListenerPort = "8000" // Default listener port
 
 // ServerStart starts the web server on the specified TCP port.  Blank will default to 8000.
-func ServerStart(port string) {
+func ServerStart(port string) (string, error) {
+
 	http.HandleFunc("/", defaultHandler) // Each call to "/" will invoke defaultHandler
 	http.HandleFunc("/blockchain/view/", blockchainViewHandler)
 
-	// Set to default TCP port number
-	if port == "" {
-		port = defaultListenerPort
-	}
+	//log.Fatal(http.ListenAndServe("localhost:"+port, nil))
+	return "Started on: " + port, http.ListenAndServe("localhost:"+port, nil)
 
-	log.Fatal(http.ListenAndServe("localhost:"+port, nil))
 }
 
 // Default handler to catch-all
 func defaultHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Default Handler called from %s.  Please try alternative methods such as /blockchain/", r.RemoteAddr)
+	fmt.Fprintf(w, "Default Handler called from %s.  Please try alternative methods such as /blockchain/view/<id>", r.RemoteAddr)
 }
 
 // Handler to manage requests to /blockchain/ subchain

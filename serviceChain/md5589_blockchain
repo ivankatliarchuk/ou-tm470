@@ -1,0 +1,12 @@
+[
+	{
+		"Index": 1,
+		"Timestamp": "2018-07-08 22:33:17.072877533 +0100 BST m=+0.027673584",
+		"Hash": "0",
+		"PrevHash": "0",
+		"Record": {
+			"Identifier": 0,
+			"Data": "seeded data"
+		}
+	}
+]
