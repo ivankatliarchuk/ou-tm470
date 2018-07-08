@@ -65,5 +65,6 @@ func Load(path string, structOut interface{}) error {
 		return err
 	}
 	defer fileOut.Close()
-	//return Unmarshal(fileOut, structOut)
+	log.Println("fffffff")
+	return Unmarshal(fileOut, structOut)
 }
