@@ -1,6 +1,13 @@
 // Core application for Service Record Blockchain
 package main
 
+import (
+	"fmt"
+
+	"github.com/mmd93ee/ou-tm470/dataPersist"
+	"github.com/mmd93ee/ou-tm470/web"
+)
+
 var blockchain []Block         // Core Blockchain
 var serviceEntryIdentifier int // Service Entry ID value
 
@@ -21,8 +28,16 @@ type ServiceRecord struct {
 }
 
 func main() {
-	server := webServer // Web Server for blockchain interaction
+	fmt.Println("Starting web server...") // Web Server for blockchain interaction
+	web.ServerStart("8000")
+}
 
+func loadBlockchain() {
+
+}
+
+func saveBlockchain() {
+	dataPersist.Save()
 }
 
 func generateGenesisBlock() {
