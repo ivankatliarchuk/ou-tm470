@@ -2,7 +2,7 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"time"
 
 	"github.com/mmd93ee/ou-tm470/dataPersist"
@@ -30,26 +30,30 @@ type ServiceRecord struct {
 }
 
 func main() {
-	loadBlockchain()
-	saveBlockchain()
+	if err := loadBlockchain(); err != nil {
+		log.Fatal(err)
+	}
+	if err := saveBlockchain(); err != nil {
+		log.Fatal(err)
+	}
 
-	fmt.Println("Starting web server...") // Web Server for blockchain interaction
+	log.Println("INFO: main(): Starting web server...") // Web Server for blockchain interaction
 	web.ServerStart("8000")
 }
 
 func loadBlockchain() error {
 	if err := dataPersist.Load(persistentFilename, blockchain); err != nil {
 		// Problem with lack of data file, lets create a genesis and return err
-		fmt.Println("Error: " + err.Error() + ".  Loading blockchain failed, generating Genesis.")
+		log.Println("INFO: loadBlockchain(): Loading blockchain failed, generating Genesis.")
 		blockchain = append(blockchain, generateGenesisBlock())
 		return err
 	}
 	return nil
 }
 
-func saveBlockchain() {
-	fmt.Println("Persisting blockchain as " + persistentFilename)
-	dataPersist.Save(persistentFilename, blockchain)
+func saveBlockchain() error {
+	log.Println("INFO: saveBlockchain(): Persisting blockchain as " + persistentFilename)
+	return dataPersist.Save(persistentFilename, blockchain)
 }
 
 // generateGenesisBlock will create the first block

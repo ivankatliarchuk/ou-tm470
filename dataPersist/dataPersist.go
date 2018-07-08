@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"os"
 	"sync"
 )
@@ -60,7 +61,7 @@ func Load(path string, structOut interface{}) error {
 
 	fileOut, err := os.Open(path)
 	if err != nil {
-		fmt.Println("Error: " + err.Error() + " while openning file " + fileOut.Name())
+		log.Println("INFO: " + err.Error() + " while openning file " + fileOut.Name())
 		return err
 	}
 	defer fileOut.Close()
