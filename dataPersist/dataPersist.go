@@ -62,9 +62,12 @@ func Load(path string, structOut interface{}) error {
 	fileOut, err := os.Open(path)
 	if err != nil {
 		log.Println("INFO: dataPersist.Load()" + err.Error() + " while openning file " + fileOut.Name())
+
+		if os.IsNotExist(err) { // Check if it does not exist or if it is a real error
+			return nil
+		}
 		return err
 	}
 	defer fileOut.Close()
-	log.Println("fffffff")
 	return Unmarshal(fileOut, structOut)
 }
