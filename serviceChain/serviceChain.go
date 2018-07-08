@@ -78,7 +78,7 @@ func generateGenesisBlock() Block {
 
 	blockString, err := json.MarshalIndent(genesisBlock, "", "/t")
 
-	log.Println("INFO: serviceChain.generateGenesisBlock(): Created block with contents: " + StructToJsonString(genesisBlock))
+	log.Println("INFO: serviceChain.generateGenesisBlock(): Created block with contents: " + dataPersist.StructToJSONString(genesisBlock))
 
 	return genesisBlock
 }
