@@ -1,0 +1,85 @@
+Draft Project Report
+What is the Problem?
+When purchasing a second hand vehicle the Service History is often used as a measure of how well maintained a vehicle is assumed to be.  The current method of providing history is based upon placing stamps into a book that is then sold along with the car for the next owner to maintain.  The Service History in itself is a valuable guide to overall condition, or expectation of condition, when purchasing a used car.  A secondary check is currently possible through running a query against the DVLA database for MOT advisories, however this is not providing sufficient coverage for assessing condition.
+The Service History is used as a differentiator against other vehicles of a similar age and millage it therefore attracts a price premium and the potential to be artificially completed to better warrant a vehicles condition.
+In order to validate a history is correct you are required to independently validate the following sources;
+Contact main dealers and check a vehicle was serviced and maintained in it’s earlier years, this is likely to be due to main dealer warranties only being valid if the vehicle is also main dealer serviced.
+Contact independent garages identified by the stamps in the booklet and see if they have a vehicle history.
+Reconcile the service history with the MOT database with DVLA to see if alignment exists in MOT and service events.
+This approach is in-efficient taking both time and effort to locate organisations and potentially error prone as time progresses;
+A vehicle may not have had a main dealer service after it was purchased.
+Independent garages may not be able to be identified by their stamps.
+Independent garages may no longer be trading, however, they may have been effective at maintaining a vehicle.
+The quality of garages may be questionable, and no mechanism exists to suggest that a service is of equivalent quality across the industry.
+The steps undertaken at service time are not of sufficient depth to understand what has taken place.
+The MOT advisory list with DVLA can be circumvented if the faults are repaired prior to the MOT test, thereby artificialy showing that a car has had no historic incidents or faults.
+
+What are the Benefits in Solving the Problem?
+In solving this problem you will be able to purchase a used vehicle and have an assurance that;
+The vehicle has been kept to its service schedule.
+The vehicle has been serviced by differing levels of quality assurance, main dealers, authorized independent specialists and local garages.
+Be aware of any major incidents, issues, faults or remediation carried out.
+The problem is known about and a quick search on eBay shows you can buy main dealer service stamps and smaller garage stamps to use in your own logbook.  ✓
+
+What are the Key ICT Attributes of a Potential Solution?
+This problem has some key attributes that will need to be factored into a solution, and relate specifically to the use of ICT solutions in disaggregated industries, including the use of technology across a very wide spectrum of stakeholders, with varying levels of technical understanding, access to funding and connectivity.
+Any solution needs to have the ability to validate organisations are who they say they are, this would be to allow for authorised dealers to have the attribute of being authorised by a different organisation.
+In order to track a vehicle, the data model needs to be developed that can understand the concept of a ‘vehicle’ and what happens when things change, such as number plates.
+Vehicles last a fairly long time, any solution needs to consider full life costs and avoiding the build up of technical debt, particularly through technology obsolesce.
+
+What is my Experience of this Problem?
+I have owned a number of vehicles, motorbikes and cars, with some being historic and others being new.  My specific interest, in the context of my vehicle history is as follows;
+1967 VW Camper.  My VW was an import from the US.  I had no idea on any history prior to it arriving in the UK and following a short period where it had some significant work carried out to the bodywork I purchased it as a project vehicle.  It would have been beneficial if I could have had an understanding of the work carried out in the UK and for the work I had done to be able to demonstrate the quality and amount of investment to the next buyer.
+1971 VW Fastback.  This was a UK car with a reasonable service record, however, the car had significant issues due to an under-investment over a number of years that would have been picked up had a more detailed understanding of work been available, rather than a stamp.
+1993 Mini Cooper S.  I recently purchased this with a full service history, I have very little ability to validate if this is genuine or if it is in line with manufacturers recommendation.  I did not buy two cars I looked at because they did not have a service book with them even though the dealer assured me they were BMW serviced and currently in great condition.
+
+What might the Solution look like?
+The current technology available to support disintermediation and disaggregation while also providing immutable record sets is blockchain.  Blockchain technology would allow a collection of independent and unrelated organisations (garages) to contribute to a system of record (blockchain) without necessarily trusting either each other or an intermediary.
+An alternative to distributed legers is the development of a centralised platform that exposes itself through API access to third parties.  Although viable this approach requires an intermediary to co-ordinate across different groups.
+In order to validate that a garage is an authorised centre, or is accredited by a main dealer or manufacturer to be a specialist the solution will need some form of key management capability, whereby smaller garages can use public key cryptography that is signed by higher level organisations.
+
+Considered or Discounted Options.
+Through the project a number of alternative solutions have been discounted since they do not meet core capabilities that a heavily disaggregated audience require.  This includes solutions involving centralised databases and web portals, that rely upon a central administration capability.  The requirement for a means of validating data input by end consumers has been removed, it is complex to implement and greater value is likely to be had in completing the proto-type core capabilities.
+The following journeys have been removed from the project scope;
+
+
+
+Project Goals and Outputs
+Project Goals
+The primary goal of this project is to prove that a number of disconnected and unrelated organisations (apart from having similar service models) can contribute to an immutable record of service history against a vehicle that is durable over the life of the vehicle.
+Additionally the quality of work needs to be assured through a recognised means of creating a hierarchy between manufacturer, main dealer and authorised dealerships and specialists.
+As part of this project I will also produce a data model and identify key data attributes that will be required in order to provide a consistent and reliable method of identifying vehicles, activities and organisations.  ✓
+Project Output
+My project will deliver the following.  The development of prototypes will be incremental with key functions and features on the product roadmap.
+
+
+Table 1. Project Deliverables / Outputs
+
+Account of Related Literature
+<NEED TO ADD REFERENCABLE PROBLEM AND DOMAIN INFORMATION>
+
+User Journeys
+List journeys and completion to date.
+
+Proposed Solution
+<DETAILS ON:
+ - Component model
+ - Breakdown progress on each
+
+
+Review
+
+Overview
+<SUMMARY OF PROGRESS>
+Reflect on changing goals
+
+Management method
+Review current Project Management method and any early shortcomings, benefits etc.  Save detail for final report.
+
+Project Risks
+Risk log
+Mitigation taken
+Additional risks through lifecycle
+
+Experience
+Reflect on experience, what have I learnt, what would I do differently
