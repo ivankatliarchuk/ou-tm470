@@ -11,7 +11,7 @@ import (
 	"github.com/mmd93ee/ou-tm470/web"
 )
 
-var Blockchain []Block                         // Core Blockchain
+var blockchain []Block                         // Core Blockchain
 var index int                                  // Block Index
 var persistentFilename = "./md5589_blockchain" // What to persist the blockchain to disk as
 
@@ -21,14 +21,47 @@ type Block struct {
 	Timestamp string
 	Hash      string
 	PrevHash  string
-
-	Record ServiceRecord
+	Event     ServiceEvent // The Service Record
 }
 
 // ServiceRecord to represent the service record data itself
-type ServiceRecord struct {
-	Identifier int
-	Data       string // PLACEHOLDER FOR DATA MODEL ENTRIES
+type ServiceEvent struct {
+	Identifier         int
+	EventDetails       EventDescription // Describe what has happened
+	EventAuthorisor    string           // Who allowed this event to happen.  Store as a public key.
+	PerformedOnVehicle Vehicle          // What was the work performed on
+	PerformedBy        Garage           // Who did the work
+}
+
+// Show the milage and the collection of events associated with it.
+type EventDescription struct {
+	EventItem     []EventType
+	VehicleMilage int
+}
+
+// An event identifier and the associated description of the event.  This is a
+// predefined set of activities that a garage can select from.
+type EventType struct {
+	EventId          int
+	EventDescription string
+}
+
+// The vehicle the activities occur on.
+type Vehicle struct {
+	V5c                 string   // Reference v5 number, do not record further details
+	VehicleMake         string   // Plain text at the moment, should probably lookup
+	VehicleModel        string   // Plain text at the moment, should probably lookup
+	VehicleColour       []string // Set as a slice with latest colour at last entry on array
+	VehicleRegistration []string // Current registration is last entry on array
+}
+
+// Garages
+type Garage struct {
+	GarageId int
+	Owner    string
+	Name     string
+	Location []string
+	Type     string
 }
 
 func main() {
