@@ -77,23 +77,23 @@ func main() {
 }
 
 func loadBlockchain() error {
-	err := dataPersist.Load(persistentFilename, &Blockchain)
+	err := dataPersist.Load(persistentFilename, &blockchain)
 	if err != nil {
 		// Problem with lack of data file, lets create a genesis and return err
 		log.Println("INFO: loadBlockchain(): Loading blockchain failed, generating Genesis.  " + err.Error())
-		Blockchain = append(Blockchain, generateGenesisBlock())
-		blockChainSize := strconv.Itoa(len(Blockchain))
+		blockchain = append(blockchain, generateGenesisBlock())
+		blockChainSize := strconv.Itoa(len(blockchain))
 		log.Println("INFO: serviceChain.loadBlockchain(): Created genesis and added to blockchain, now of size " + blockChainSize)
 		return nil
 	}
-	blockChainSize := strconv.Itoa(len(Blockchain))
+	blockChainSize := strconv.Itoa(len(blockchain))
 	log.Println("INFO: serviceChain.loadBlockchain(): Loaded blockchain, total records = " + blockChainSize)
 	return nil
 }
 
 func saveBlockchain() error {
 	log.Println("INFO: serviceChain.saveBlockchain(): Persisting blockchain as " + persistentFilename)
-	return dataPersist.Save(persistentFilename, Blockchain)
+	return dataPersist.Save(persistentFilename, blockchain)
 }
 
 // generateGenesisBlock will create the first block
@@ -108,22 +108,22 @@ func generateGenesisBlock() Block {
 
 	// Seed values for Garage, Vehicle, EventType and EventDescription
 	genesisRecordGarage.GarageId = 0
-	genesisRecordGarage.Location = "genesis location"
+	genesisRecordGarage.Location[0] = "genesis location"
 	genesisRecordGarage.Name = "genesis inc."
 	genesisRecordGarage.Owner = "genesis and co."
 	genesisRecordGarage.Type = "main dealer"
 
 	genesisRecordVehicle.V5c = "63ne515"
-	genesisRecordVehicle.VehicleColour = "colour"
+	genesisRecordVehicle.VehicleColour[0] = "colour"
 	genesisRecordVehicle.VehicleMake = "genesis make"
-	genesisRecordVehicle = "genesis model"
-	genesisRecordVehicle.VehicleRegistration = "GEN 351 S"
-
-	genesisRecordEventDescription.EventItem = 0
-	genesisRecordEventDescription.VehicleMilage = 10000000
+	genesisRecordVehicle.VehicleModel = "genesis model"
+	genesisRecordVehicle.VehicleRegistration[0] = "GEN 351 S"
 
 	genesisRecordEventDescriptionType.EventId = 0
-	genesisRecordEventDescriptionType = "genesis event"
+	genesisRecordEventDescriptionType.EventDescription = "genesis event"
+
+	genesisRecordEventDescription.EventItem[0] = genesisRecordEventDescriptionType
+	genesisRecordEventDescription.VehicleMilage = 10000000
 
 	// Set the values for the Block
 	genesisBlock.Index = 1
@@ -131,12 +131,6 @@ func generateGenesisBlock() Block {
 	genesisBlock.PrevHash = "0"
 	genesisBlock.Timestamp = time.Now().String()
 	genesisBlock.Event = genesisRecord
-
-	// Set the values for the Service Event
-	genesisRecord.Identifier = 0
-
-	genesisRecord.Data = "seeded data"
-	genesisBlock.Record = genesisRecord
 
 	blockString, err := json.MarshalIndent(genesisBlock, "", "\t")
 	if err != nil {
