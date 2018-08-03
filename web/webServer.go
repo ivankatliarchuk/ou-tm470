@@ -3,7 +3,9 @@ package web
 
 import (
 	"fmt"
+	"log"
 	"net/http"
+	"strconv"
 	"strings"
 )
 
@@ -30,13 +32,16 @@ func blockchainViewHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Take the URL beyond /blockchain/ and split into request and value strings
 	requestAction := strings.Split(r.URL.String(), "/")
-	requestItem := requestAction[2]
+	requestItem, err := strconv.Atoi(requestAction[3])
+	if err != nil {
+		log.Println("ERROR: Unable to convert argument to integer" + err.Error())
+	}
 
 	// DEBUG
 	fmt.Fprintf(w, "Request made for item ID %v", requestItem)
 
-	if requestItem == "" { //Request item is invalid so display that blockID only
-		fmt.Printf("Stub behaviour - no block ID hence print entre chain")
+	if requestItem == 0 { //Request item is invalid so display that blockID only
+		fmt.Printf("\nStub behaviour - no block ID hence print entre chain")
 	} else {
 		fmt.Fprintf(w, "\nStub behaviour - print block number %s", requestAction)
 	}
