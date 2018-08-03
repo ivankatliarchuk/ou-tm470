@@ -100,14 +100,41 @@ func saveBlockchain() error {
 func generateGenesisBlock() Block {
 
 	var genesisBlock Block
-	var genesisRecord ServiceRecord
+	var genesisRecord ServiceEvent
+	var genesisRecordEventDescription EventDescription
+	var genesisRecordEventDescriptionType EventType
+	var genesisRecordVehicle Vehicle
+	var genesisRecordGarage Garage
 
-	// Set the values
+	// Seed values for Garage, Vehicle, EventType and EventDescription
+	genesisRecordGarage.GarageId = 0
+	genesisRecordGarage.Location = "genesis location"
+	genesisRecordGarage.Name = "genesis inc."
+	genesisRecordGarage.Owner = "genesis and co."
+	genesisRecordGarage.Type = "main dealer"
+
+	genesisRecordVehicle.V5c = "63ne515"
+	genesisRecordVehicle.VehicleColour = "colour"
+	genesisRecordVehicle.VehicleMake = "genesis make"
+	genesisRecordVehicle = "genesis model"
+	genesisRecordVehicle.VehicleRegistration = "GEN 351 S"
+
+	genesisRecordEventDescription.EventItem = 0
+	genesisRecordEventDescription.VehicleMilage = 10000000
+
+	genesisRecordEventDescriptionType.EventId = 0
+	genesisRecordEventDescriptionType = "genesis event"
+
+	// Set the values for the Block
 	genesisBlock.Index = 1
 	genesisBlock.Hash = "0"
 	genesisBlock.PrevHash = "0"
 	genesisBlock.Timestamp = time.Now().String()
+	genesisBlock.Event = genesisRecord
+
+	// Set the values for the Service Event
 	genesisRecord.Identifier = 0
+
 	genesisRecord.Data = "seeded data"
 	genesisBlock.Record = genesisRecord
 
