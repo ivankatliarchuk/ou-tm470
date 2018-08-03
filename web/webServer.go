@@ -30,7 +30,7 @@ func blockchainViewHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Take the URL beyond /blockchain/ and split into request and value strings
 	requestAction := strings.Split(r.URL.String(), "/")
-	requestItem := requestAction[3]
+	requestItem := requestAction[2]
 
 	// DEBUG
 	fmt.Fprintf(w, "Request made for item ID %v", requestItem)
@@ -38,6 +38,6 @@ func blockchainViewHandler(w http.ResponseWriter, r *http.Request) {
 	if requestItem == "" { //Request item is invalid so display that blockID only
 		fmt.Printf("Stub behaviour - no block ID hence print entre chain")
 	} else {
-		fmt.Fprintf(w, "Stub behaviour - print block number %s", requestAction)
+		fmt.Fprintf(w, "\nStub behaviour - print block number %s", requestAction)
 	}
 }
