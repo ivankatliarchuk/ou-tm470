@@ -120,7 +120,7 @@ func generateGenesisBlock() Block {
 	genesisRecordGarage.Type = "main dealer"
 
 	genesisRecordVehicle.V5c = "63ne515"
-	genesisRecordVehicle.VehicleColour[0] = "colour"
+	genesisRecordVehicle.VehicleColour = append(genesisRecordVehicle.VehicleColour, "starting colour")
 	genesisRecordVehicle.VehicleMake = "genesis make"
 	genesisRecordVehicle.VehicleModel = "genesis model"
 	genesisRecordVehicle.VehicleRegistration[0] = "GEN 351 S"
