@@ -123,12 +123,12 @@ func generateGenesisBlock() Block {
 	genesisRecordVehicle.VehicleColour = append(genesisRecordVehicle.VehicleColour, "starting colour")
 	genesisRecordVehicle.VehicleMake = "genesis make"
 	genesisRecordVehicle.VehicleModel = "genesis model"
-	genesisRecordVehicle.VehicleRegistration[0] = "GEN 351 S"
+	genesisRecordVehicle.VehicleRegistration = append(genesisRecordVehicle.VehicleRegistration, "GEN 351 S")
 
 	genesisRecordEventDescriptionType.EventId = 0
 	genesisRecordEventDescriptionType.EventDescription = "genesis event"
 
-	genesisRecordEventDescription.EventItem[0] = genesisRecordEventDescriptionType
+	genesisRecordEventDescription.EventItem = append(genesisRecordEventDescription.EventItem, genesisRecordEventDescriptionType)
 	genesisRecordEventDescription.VehicleMilage = 10000000
 
 	// Set the values for the Block
