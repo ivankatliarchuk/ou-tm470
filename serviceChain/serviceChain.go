@@ -98,7 +98,8 @@ func loadBlockchain() error {
 }
 
 func saveBlockchain() error {
-	log.Println("INFO: serviceChain.saveBlockchain(): Persisting blockchain as " + persistentFilename)
+	log.Println(blockchain + "INFO: serviceChain.saveBlockchain(): Persisting blockchain as " + persistentFilename)
+
 	return dataPersist.Save(persistentFilename, blockchain)
 }
 
