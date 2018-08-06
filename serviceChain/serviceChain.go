@@ -132,6 +132,13 @@ func generateGenesisBlock() Block {
 	genesisRecordEventDescription.EventItem = append(genesisRecordEventDescription.EventItem, genesisRecordEventDescriptionType)
 	genesisRecordEventDescription.VehicleMilage = 10000000
 
+	// Pull all the objects into ServiceEvent
+	genesisRecord.EventAuthorisor = "Created by serviceChain as the Genesis Block"
+	genesisRecord.EventDetails = genesisRecordEventDescription
+	genesisRecord.Identifier = 0
+	genesisRecord.PerformedBy = genesisRecordGarage
+	genesisRecord.PerformedOnVehicle = genesisRecordVehicle
+
 	// Set the values for the Block
 	genesisBlock.Index = 1
 	genesisBlock.Hash = "0"
