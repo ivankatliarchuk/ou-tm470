@@ -66,7 +66,7 @@ type Garage struct {
 
 func main() {
 	if err := loadBlockchain(); err != nil {
-		log.Fatalln(err)
+		//	log.Fatalln(err)
 	}
 	if err := saveBlockchain(); err != nil {
 		log.Fatalln(err)
