@@ -66,7 +66,7 @@ type Garage struct {
 
 func main() {
 	if err := loadBlockchain(); err != nil {
-		//	log.Fatalln(err)
+		log.Fatalln(err)
 	}
 	if err := saveBlockchain(); err != nil {
 		log.Fatalln(err)
@@ -88,6 +88,12 @@ func loadBlockchain() error {
 	}
 	blockChainSize := strconv.Itoa(len(blockchain))
 	log.Println("INFO: serviceChain.loadBlockchain(): Loaded blockchain, total records = " + blockChainSize)
+
+	if blockChainSize < 1 { // Blockchain is too small so is missing genesis data
+		log.Println("INFO: Block is too small to hold data, seeding genesis block")
+		blockchain = append(blockchain, generateGenesisBlock())
+		return nil
+	}
 	return nil
 }
 
