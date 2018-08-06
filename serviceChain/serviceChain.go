@@ -89,7 +89,7 @@ func loadBlockchain() error {
 	blockChainSize := strconv.Itoa(len(blockchain))
 	log.Println("INFO: serviceChain.loadBlockchain(): Loaded blockchain, total records = " + blockChainSize)
 
-	if blockChainSize < 1 { // Blockchain is too small so is missing genesis data
+	if len(blockchain) < 1 { // Blockchain is too small so is missing genesis data
 		log.Println("INFO: Block is too small to hold data, seeding genesis block")
 		blockchain = append(blockchain, generateGenesisBlock())
 		return nil
