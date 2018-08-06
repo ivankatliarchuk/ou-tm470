@@ -114,7 +114,7 @@ func generateGenesisBlock() Block {
 
 	// Seed values for Garage, Vehicle, EventType and EventDescription
 	genesisRecordGarage.GarageId = 0
-	genesisRecordGarage.Location[0] = "genesis location"
+	genesisRecordGarage.Location[1] = "genesis location"
 	genesisRecordGarage.Name = "genesis inc."
 	genesisRecordGarage.Owner = "genesis and co."
 	genesisRecordGarage.Type = "main dealer"

@@ -24,7 +24,6 @@ var Marshal = func(structIn interface{}) (io.Reader, error) {
 
 // Unmarshal interface for converting file to struct
 var Unmarshal = func(reader io.Reader, structIn interface{}) error {
-	log.Println("This far??")
 	return json.NewDecoder(reader).Decode(structIn)
 }
 
@@ -61,7 +60,7 @@ func Load(path string, structOut interface{}) error {
 
 	fileOut, err := os.Open(path)
 
-	if os.IsNotExist(err) { // Check if it does not exist or if it is a real error
+	if !os.IsNotExist(err) { // Check if it does not exist or if it is a real error
 		log.Println("INFO: dataPersist.Load(): File does not exist.")
 		return nil
 	}
