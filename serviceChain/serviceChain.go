@@ -187,11 +187,14 @@ func blockchainViewHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println("ERROR: Unable to convert argument to integer" + err.Error())
 	}
 
-	// DEBUG
-	fmt.Fprintf(w, "Request made for item ID %v", requestItem)
-
 	if requestItem == 0 { //Request item is invalid so display that blockID only
-		fmt.Printf("\nStub behaviour - no block ID hence print entre chain")
+		fmt.Printf("\nStub behaviour - no block ID hence print entire chain")
+		blockString, err := json.MarshalIndent(blockchain, "", "\t")
+		if err != nil {
+			log.Println("ERROR: Cannot print blockchain")
+		}
+		fmt.Printf("\n %s", blockString)
+
 	} else {
 		fmt.Fprintf(w, "\nStub behaviour - print block number %s.", requestAction)
 	}
