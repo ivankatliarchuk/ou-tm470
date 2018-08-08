@@ -188,7 +188,7 @@ func blockchainViewHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if requestItem == 0 { //Request item is invalid so display that blockID only
-		fmt.Printf("\nStub behaviour - no block ID hence print entire chain")
+		fmt.Fprintf("\nStub behaviour - no block ID hence print entire chain")
 		blockString, err := json.MarshalIndent(blockchain, "", "\t")
 		if err != nil {
 			log.Println("ERROR: Cannot print blockchain")
