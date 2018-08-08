@@ -9,6 +9,11 @@ import (
 	"strings"
 )
 
+// Blockchain struct to provide access into data for httpHandlers
+type blockchainReference struct {
+	bc *servicechain.BlockchainReference
+}
+
 var defaultListenerPort = "8000" // Default listener port
 
 // ServerStart starts the web server on the specified TCP port.  Blank will default to 8000.
@@ -43,6 +48,6 @@ func blockchainViewHandler(w http.ResponseWriter, r *http.Request) {
 	if requestItem == 0 { //Request item is invalid so display that blockID only
 		fmt.Printf("\nStub behaviour - no block ID hence print entre chain")
 	} else {
-		fmt.Fprintf(w, "\nStub behaviour - print block number %s", requestAction)
+		fmt.Fprintf(w, "\nStub behaviour - print block number %s.", requestAction)
 	}
 }
