@@ -196,7 +196,7 @@ func blockchainViewHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		blockItemString, err := json.MarshalIndent(blockchain[requestItem], "", "\t")
 		if err != nil {
-			log.Println("ERROR: Cannot print block id " + strconv.Itoa(requestItem))
+			fmt.Fprintf(w, "ERROR: Cannot print block id %s, index too high?", strconv.Itoa(requestItem))
 		}
 		fmt.Fprintf(w, "\n %s.", blockItemString)
 	}
