@@ -195,6 +195,9 @@ func blockchainViewHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "\n %s", blockString)
 	} else {
 		blockItemString, err := json.MarshalIndent(blockchain[requestItem], "", "\t")
-		fmt.Fprintf(w, "\nStub behaviour - print block number %s.", requestAction)
+		if err != nil {
+			log.Println("ERROR: Cannot print block id " + strconv.Itoa(requestItem))
+		}
+		fmt.Fprintf(w, "\n %s.", blockItemString)
 	}
 }
