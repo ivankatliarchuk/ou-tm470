@@ -73,5 +73,7 @@ func Load(path string, structOut interface{}) error {
 	}
 
 	defer fileOut.Close()
-	return Unmarshal(fileOut, structOut)
+	Unmarshal(fileOut, structOut)
+
+	return nil
 }
