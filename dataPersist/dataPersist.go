@@ -68,7 +68,7 @@ func Load(path string, structOut interface{}) error {
 	*/
 
 	if err != nil {
-		log.Println("INFO: dataPersist.Load() " + err.Error() + " while openning file " + path)
+		log.Println("ERROR: dataPersist.Load() " + err.Error() + " while openning file " + path)
 		return err
 	}
 
