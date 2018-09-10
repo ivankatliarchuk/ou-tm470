@@ -2,6 +2,8 @@
 package main
 
 import (
+	"crypto/sha256"
+	"encoding/hex"
 	"encoding/json"
 	"log"
 	"strconv"
@@ -15,10 +17,20 @@ import (
 	"strings"
 )
 
-var blockchain []Block                         // Core Blockchain
-var index int                                  // Block Index
-var persistentFilename = "./md5589_blockchain" // What to persist the blockchain to disk as
-var defaultListenerPort = "8000"               // Default listener port
+// Core blockchain and persistent data sets
+var blockchain []Block
+var validGarages []Garage
+var validVehicles []Vehicle
+var validEvents []EventType
+
+// Data files and persistence variables
+var persistentFilename = "./md5589_blockchain"      // What to persist the blockchain to disk as
+var validGarageDataFile = "./md5589_garages.json"   // Where is the list of Garages
+var validVehicleDataFile = "./md5589_vehicles.json" // Where is the list of Garages
+var validEventDataFile = "./md5589_events.json"     // Where is the list of Garages
+
+var index int                    // Block Index
+var defaultListenerPort = "8000" // Default listener port
 
 // Block struct service chain
 type Block struct {
@@ -108,6 +120,75 @@ func saveBlockchain() error {
 	return dataPersist.Save(persistentFilename, blockchain)
 }
 
+// Generate a new block based on the old block and new payload
+func generateNewBlock(oldBlock Block, dataPayload string) (Block, error) {
+
+	var newBlock Block
+	timeNow := time.Now()
+
+	newBlock.Index = oldBlock.Index + 1
+	newBlock.Timestamp = timeNow.String()
+
+	newEvent, err := dataPayloadtoServiceEvent(dataPayload)
+
+	if err != nil {
+		log.Println("ERROR: Unable to convert data payload into ServiceEvent for new block generation.")
+	}
+
+	newBlock.Event = newEvent
+	newBlock.PrevHash = oldBlock.Hash
+	newBlock.Hash = calculateHash(newBlock)
+
+	return newBlock, nil
+}
+
+// Load Garages, Vehicles and Events in order to provide baseline data sets
+func loadBaseData() error {
+
+	err := dataPersist.Load(validGarageDataFile, validGarages)
+
+	if err != nil {
+		log.Println("ERROR: Unable to load valid garage data")
+		return err
+	}
+
+	err = dataPersist.Load(validVehicleDataFile, validVehicles)
+	if err != nil {
+		log.Println("ERROR: Unable to load valid vehicles data")
+		return err
+	}
+
+	err = dataPersist.Load(validEventDataFile, validEvents)
+	if err != nil {
+		log.Println("ERROR: Unable to load valid events data")
+		return err
+	}
+	return nil
+}
+
+// Convert a data payload from the web handler into a ServiceEvent
+func dataPayloadtoServiceEvent(dataPayload string) (ServiceEvent, error) {
+
+	var newServiceEvent ServiceEvent
+	var newEventDescription EventDescription
+	var newEventDescriptionType EventType
+	var vehicle Vehicle
+	var garage Garage
+
+	return newServiceEvent, nil
+}
+
+// Hash function to take key block data and return a SHA256 hash as a string
+func calculateHash(block Block) string {
+
+	// Time and vehicle identifier (v5c) are the key block items to generate the hash
+	record := string(string(block.Index) + block.Timestamp + block.Event.PerformedOnVehicle.V5c + block.PrevHash)
+	h := sha256.New()
+	h.Write([]byte(record))
+	hashed := h.Sum(nil)
+	return hex.EncodeToString(hashed)
+}
+
 // generateGenesisBlock will create the first block
 func generateGenesisBlock() Block {
 
@@ -194,10 +275,21 @@ func blockchainViewHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		fmt.Fprintf(w, "\n %s", blockString)
 	} else {
-		blockItemString, err := json.MarshalIndent(blockchain[requestItem], "", "\t")
-		if err != nil {
-			defer fmt.Fprintf(w, "ERROR: Cannot print block id %s, index too high?", strconv.Itoa(requestItem))
-		}
+		blockItemString, _ := json.MarshalIndent(blockchain[requestItem], "", "\t") // Do nothing if index too high
 		fmt.Fprintf(w, "\n %s.", blockItemString)
 	}
+}
+
+// Handler to manage requests to /garage/ subchain
+func garageViewHandler(w http.ResponseWriter, r *http.Request) {
+
+	// Take the URL beyond /garage/ and split into request and value strings
+	requestAction := strings.Split(r.URL.String(), "/")
+	requestItem, err := strconv.Atoi(requestAction[3])
+	if err != nil {
+		log.Println("ERROR: Unable to convert argument to integer" + err.Error())
+	}
+
+	garageString, _ := json.MarshalIndent(validGarages[requestItem], "", "\t") // Do nothing if index too high
+	fmt.Fprintf(w, "\n %s.", garageString)
 }
