@@ -58,6 +58,7 @@ func Load(path string, structOut interface{}) error {
 	lock.Lock()
 	defer lock.Unlock()
 
+	log.Println("INFO: Loading " + path)
 	fileOut, err := os.Open(path)
 
 	// DEPRECATED - PERSISTENT FILE WILL ALWAYS exist
