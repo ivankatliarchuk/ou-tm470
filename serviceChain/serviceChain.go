@@ -150,20 +150,20 @@ func generateNewBlock(oldBlock Block, dataPayload string) (Block, error) {
 // Load Garages, Vehicles and Events in order to provide baseline data sets
 func loadBaseData() error {
 
-	err := fileToInterface(validGarageDataFile, ValidGarages)
+	err := fileToInterface(validGarageDataFile, &ValidGarages)
 
 	if err != nil {
 		log.Println("ERROR: Unable to load valid garage data")
 		return err
 	}
 
-	err = fileToInterface(validVehicleDataFile, ValidVehicles)
+	err = fileToInterface(validVehicleDataFile, &ValidVehicles)
 	if err != nil {
 		log.Println("ERROR: Unable to load valid vehicles data")
 		return err
 	}
 
-	err = fileToInterface(validEventDataFile, ValidEvents)
+	err = fileToInterface(validEventDataFile, &ValidEvents)
 	if err != nil {
 		log.Println("ERROR: Unable to load valid events data")
 		return err
