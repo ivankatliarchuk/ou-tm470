@@ -99,7 +99,7 @@ func main() {
 }
 
 func loadBlockchain() error {
-	err := fileToInterface(persistentFilename, Blockchain)
+	err := fileToInterface(persistentFilename, &Blockchain)
 	if err != nil {
 		// Problem with lack of data file, lets create a genesis and return err
 		log.Println("INFO: loadBlockchain(): Loading Blockchain failed, generating Genesis.  " + err.Error())
