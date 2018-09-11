@@ -4,5 +4,13 @@
 		"Name": "Genesis Inc.",
 		"Location": "Genesis Garage Location",
 		"Type": "Main Dealer"
-	}
+	},
+
+	{
+			"GarageId": 1,
+			"Owner": "A. C. Car and Sons",
+			"Name": "Second Generation Services",
+			"Location": "New Road, Littlehamption, Sussex, AN3 C45",
+			"Type": "Main Dealer"
+		}
 ]
