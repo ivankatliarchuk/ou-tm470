@@ -356,12 +356,10 @@ func fileToInterface(path string, structOut interface{}) error {
 	log.Println("INFO: Loading " + path)
 	fileOut, err := os.Open(path)
 
-	// DEPRECATED - PERSISTENT FILE WILL ALWAYS exist
-	/*	if !os.IsNotExist(err) { // Check if it does not exist or if it is a real error
-			log.Println("INFO: dataPersist.fileToInterface(): File does not exist.")
-			return nil
-		}
-	*/
+	if !os.IsNotExist(err) { // Check if it does not exist or if it is a real error
+		log.Println("INFO: dataPersist.fileToInterface(): File does not exist.")
+		return nil
+	}
 
 	if err != nil {
 		log.Println("ERROR: fileToInterface() " + err.Error() + " while openning file " + path)
