@@ -2,19 +2,25 @@
 package main
 
 import (
+	"bytes"
 	"crypto/sha256"
 	"encoding/hex"
 	"encoding/json"
+	"io"
 	"log"
+	"os"
 	"strconv"
+	"sync"
 	"time"
 
-	"github.com/mmd93ee/ou-tm470/dataPersist"
+	//"github.com/mmd93ee/ou-tm470/dataPersist"
 	//	"github.com/mmd93ee/ou-tm470/web"
 
 	"fmt"
 	"net/http"
 	"strings"
+
+	"github.com/mmd93ee/ou-tm470/dataPersist"
 )
 
 // Core blockchain and persistent data sets
@@ -22,6 +28,7 @@ var blockchain []Block
 var validGarages []Garage
 var validVehicles []Vehicle
 var validEvents []EventType
+var lock sync.Mutex
 
 // Data files and persistence variables
 var persistentFilename = "./md5589_blockchain"      // What to persist the blockchain to disk as
@@ -292,4 +299,77 @@ func garageViewHandler(w http.ResponseWriter, r *http.Request) {
 
 	garageString, _ := json.MarshalIndent(validGarages[requestItem], "", "\t") // Do nothing if index too high
 	fmt.Fprintf(w, "\n %s.", garageString)
+}
+
+/*
+All data persistence functions and ways of writing and saving to the file
+system to be located below here.  FUture state to move this to a different
+package for portability.
+*/
+
+// Marshal interface to JSON for writing out to file
+var Marshal = func(structIn interface{}) (io.Reader, error) {
+
+	bytesIn, err := json.MarshalIndent(structIn, "", "\t")
+	if err != nil {
+		return nil, err
+	}
+	return bytes.NewReader(bytesIn), nil
+}
+
+// Unmarshal interface for converting file to struct
+var Unmarshal = func(reader io.Reader, structIn interface{}) error {
+	return json.NewDecoder(reader).Decode(structIn)
+}
+
+// Save will convert the input interface (v) into a JSON formatted object on disk
+func Save(path string, structIn interface{}) error {
+
+	// Create a lock and then defer the unlock until function exit
+	lock.Lock()
+	defer lock.Unlock()
+
+	//Create os.File and defer close
+	file, err := os.Create(path)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+
+	// Create a reader (via marshal) that we can use to copy into the writer
+	reader, err := Marshal(structIn)
+	if err != nil {
+		return err
+	}
+	_, err = io.Copy(file, reader)
+	return err
+
+}
+
+// Load is used to convert a JSON (marshall output formatted) file to a struct (interface)
+func Load(path string, structOut interface{}) error {
+
+	// Lock and defer the unlock until function exit
+	lock.Lock()
+	defer lock.Unlock()
+
+	log.Println("INFO: Loading " + path)
+	fileOut, err := os.Open(path)
+
+	// DEPRECATED - PERSISTENT FILE WILL ALWAYS exist
+	/*	if !os.IsNotExist(err) { // Check if it does not exist or if it is a real error
+			log.Println("INFO: dataPersist.Load(): File does not exist.")
+			return nil
+		}
+	*/
+
+	if err != nil {
+		log.Println("ERROR: dataPersist.Load() " + err.Error() + " while openning file " + path)
+		return err
+	}
+
+	defer fileOut.Close()
+	Unmarshal(fileOut, structOut)
+
+	return nil
 }
