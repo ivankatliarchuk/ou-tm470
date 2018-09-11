@@ -122,7 +122,7 @@ func loadBlockchain() error {
 func saveBlockchain() error {
 	log.Println("INFO: serviceChain.saveBlockchain(): Persisting blockchain as " + persistentFilename)
 
-	return Save(persistentFilename, blockchain)
+	return interfaceToFile(persistentFilename, blockchain)
 }
 
 // Generate a new block based on the old block and new payload
@@ -179,6 +179,8 @@ func dataPayloadtoServiceEvent(dataPayload string) (ServiceEvent, error) {
 	var newEventDescriptionType EventType
 	var vehicle Vehicle
 	var garage Garage
+
+	log.Print(string(newServiceEvent.Identifier) + string(newEventDescription.VehicleMilage) + string(newEventDescriptionType.EventId) + string(vehicle.V5c) + string(garage.GarageId))
 
 	return newServiceEvent, nil
 }
@@ -321,7 +323,7 @@ var Unmarshal = func(reader io.Reader, structIn interface{}) error {
 }
 
 // Save will convert the input interface (v) into a JSON formatted object on disk
-func Save(path string, structIn interface{}) error {
+func interfaceToFile(path string, structIn interface{}) error {
 
 	// Create a lock and then defer the unlock until function exit
 	lock.Lock()
