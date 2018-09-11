@@ -357,7 +357,7 @@ func fileToInterface(path string, structOut interface{}) error {
 	fileOut, err := os.Open(path)
 
 	if !os.IsNotExist(err) { // Check if it does not exist or if it is a real error
-		log.Println("INFO: fileToInterface(): File does not exist, returning nil.")
+		log.Println("INFO: fileToInterface(): File does not exist, returning nil." + err.Error())
 		return err
 	}
 
