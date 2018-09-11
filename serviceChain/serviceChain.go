@@ -29,7 +29,7 @@ var validEvents []EventType
 var lock sync.Mutex
 
 // Data files and persistence variables
-var persistentFilename = "./md5589_blockchain"      // What to persist the blockchain to disk as
+var persistentFilename = "md5589_blockchain"        // What to persist the blockchain to disk as
 var validGarageDataFile = "./md5589_garages.json"   // Where is the list of Garages
 var validVehicleDataFile = "./md5589_vehicles.json" // Where is the list of Garages
 var validEventDataFile = "./md5589_events.json"     // Where is the list of Garages
