@@ -330,7 +330,7 @@ func interfaceToFile(path string, structIn interface{}) error {
 	defer lock.Unlock()
 
 	//Create os.File and defer close
-	file, err := os.Create(string(path + ".out"))
+	file, err := os.Create(string(path))
 	if err != nil {
 		return err
 	}
