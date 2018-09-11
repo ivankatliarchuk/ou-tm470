@@ -94,6 +94,10 @@ func main() {
 		log.Fatalln(err)
 	}
 
+	if err := loadBaseData(); err != nil {
+		log.Fatalln(err)
+	}
+
 	log.Println("INFO: serviceChain.main(): Starting web server...") // Web Server for blockchain interaction
 	ServerStart("8000")
 }
