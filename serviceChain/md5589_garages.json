@@ -1,5 +1,5 @@
 [	{
-		"GarageId": 0,
+		"GarageId": 1,
 		"Owner": "Genesis and Co.",
 		"Name": "Genesis Inc.",
 		"Location": "Genesis Garage Location",
@@ -7,7 +7,7 @@
 	},
 
 	{
-			"GarageId": 1,
+			"GarageId": 2,
 			"Owner": "A. C. Car and Sons",
 			"Name": "Second Generation Services",
 			"Location": "New Road, Littlehamption, Sussex, AN3 C45",

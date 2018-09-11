@@ -298,11 +298,20 @@ func garageViewHandler(w http.ResponseWriter, r *http.Request) {
 	requestAction := strings.Split(r.URL.String(), "/")
 	requestItem, err := strconv.Atoi(requestAction[3])
 	if err != nil {
-		log.Println("ERROR: Unable to convert argument to integer" + err.Error())
+		log.Println("ERROR: garageViewHandler(): Unable to convert argument to integer" + err.Error())
 	}
 
-	garageString, _ := json.MarshalIndent(ValidGarages[requestItem], "", "\t") // Do nothing if index too high
-	fmt.Fprintf(w, "\n %s.", garageString)
+	if requestItem == 0 { //no value so display them all
+		garageString, err := json.MarshalIndent(ValidGarages, "", "\t")
+
+		if err != nil {
+			log.Println("ERROR: garageViewHandler(): Cannot print Garages JSON data")
+		}
+		fmt.Fprintf(w, "\n %s", garageString)
+	} else {
+		garageString, _ := json.MarshalIndent(ValidGarages[requestItem], "", "\t") // Do nothing if index too high
+		fmt.Fprintf(w, "\n %s.", garageString)
+	}
 }
 
 /*
