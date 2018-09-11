@@ -298,7 +298,7 @@ func garageViewHandler(w http.ResponseWriter, r *http.Request) {
 	requestAction := strings.Split(r.URL.String(), "/")
 	requestItem, err := strconv.Atoi(requestAction[3])
 	if err != nil {
-		log.Println("ERROR: garageViewHandler(): Unable to convert argument to integer, setting to -1" + err.Error())
+		log.Println("INFO: garageViewHandler(): No garage id requested, setting to -1 " + err.Error())
 		requestItem = -1
 	}
 
