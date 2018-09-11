@@ -21,11 +21,11 @@ import (
 	"strings"
 )
 
-// Core blockchain and persistent data sets
-var blockchain []Block
-var validGarages []Garage
-var validVehicles []Vehicle
-var validEvents []EventType
+// Core Blockchain and persistent data sets
+var Blockchain []Block
+var ValidGarages []Garage
+var ValidVehicles []Vehicle
+var ValidEvents []EventType
 var lock sync.Mutex
 
 // Data files and persistence variables
@@ -99,30 +99,30 @@ func main() {
 }
 
 func loadBlockchain() error {
-	err := fileToInterface(persistentFilename, blockchain)
+	err := fileToInterface(persistentFilename, Blockchain)
 	if err != nil {
 		// Problem with lack of data file, lets create a genesis and return err
-		log.Println("INFO: loadBlockchain(): Loading blockchain failed, generating Genesis.  " + err.Error())
-		blockchain = append(blockchain, generateGenesisBlock())
-		blockChainSize := strconv.Itoa(len(blockchain))
-		log.Println("INFO: serviceChain.loadBlockchain(): Created genesis and added to blockchain, now of size " + blockChainSize)
+		log.Println("INFO: loadBlockchain(): Loading Blockchain failed, generating Genesis.  " + err.Error())
+		Blockchain = append(Blockchain, generateGenesisBlock())
+		blockchainSize := strconv.Itoa(len(Blockchain))
+		log.Println("INFO: serviceChain.loadBlockchain(): Created genesis and added to Blockchain, now of size " + blockchainSize)
 		return nil
 	}
-	blockChainSize := strconv.Itoa(len(blockchain))
-	log.Println("INFO: serviceChain.loadBlockchain(): Loaded blockchain, total records = " + blockChainSize)
+	blockchainSize := strconv.Itoa(len(Blockchain))
+	log.Println("INFO: serviceChain.loadBlockchain(): Loaded Blockchain, total records = " + blockchainSize)
 
-	if len(blockchain) < 1 { // Blockchain is too small so is missing genesis data
+	if len(Blockchain) < 1 { // Blockchain is too small so is missing genesis data
 		log.Println("INFO: Block is too small to hold data, seeding genesis block")
-		blockchain = append(blockchain, generateGenesisBlock())
+		Blockchain = append(Blockchain, generateGenesisBlock())
 		return nil
 	}
 	return nil
 }
 
 func saveBlockchain() error {
-	log.Println("INFO: serviceChain.saveBlockchain(): Persisting blockchain as " + persistentFilename)
+	log.Println("INFO: serviceChain.saveBlockchain(): Persisting Blockchain as " + persistentFilename)
 
-	return interfaceToFile(persistentFilename, blockchain)
+	return interfaceToFile(persistentFilename, Blockchain)
 }
 
 // Generate a new block based on the old block and new payload
@@ -150,20 +150,20 @@ func generateNewBlock(oldBlock Block, dataPayload string) (Block, error) {
 // Load Garages, Vehicles and Events in order to provide baseline data sets
 func loadBaseData() error {
 
-	err := fileToInterface(validGarageDataFile, validGarages)
+	err := fileToInterface(validGarageDataFile, ValidGarages)
 
 	if err != nil {
 		log.Println("ERROR: Unable to load valid garage data")
 		return err
 	}
 
-	err = fileToInterface(validVehicleDataFile, validVehicles)
+	err = fileToInterface(validVehicleDataFile, ValidVehicles)
 	if err != nil {
 		log.Println("ERROR: Unable to load valid vehicles data")
 		return err
 	}
 
-	err = fileToInterface(validEventDataFile, validEvents)
+	err = fileToInterface(validEventDataFile, ValidEvents)
 	if err != nil {
 		log.Println("ERROR: Unable to load valid events data")
 		return err
@@ -276,13 +276,13 @@ func blockchainViewHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if requestItem == 0 { //Request item is invalid so display that blockID only
-		blockString, err := json.MarshalIndent(blockchain, "", "\t")
+		blockString, err := json.MarshalIndent(Blockchain, "", "\t")
 		if err != nil {
-			log.Println("ERROR: Cannot print blockchain")
+			log.Println("ERROR: Cannot print Blockchain")
 		}
 		fmt.Fprintf(w, "\n %s", blockString)
 	} else {
-		blockItemString, _ := json.MarshalIndent(blockchain[requestItem], "", "\t") // Do nothing if index too high
+		blockItemString, _ := json.MarshalIndent(Blockchain[requestItem], "", "\t") // Do nothing if index too high
 		fmt.Fprintf(w, "\n %s.", blockItemString)
 	}
 }
@@ -297,7 +297,7 @@ func garageViewHandler(w http.ResponseWriter, r *http.Request) {
 		log.Println("ERROR: Unable to convert argument to integer" + err.Error())
 	}
 
-	garageString, _ := json.MarshalIndent(validGarages[requestItem], "", "\t") // Do nothing if index too high
+	garageString, _ := json.MarshalIndent(ValidGarages[requestItem], "", "\t") // Do nothing if index too high
 	fmt.Fprintf(w, "\n %s.", garageString)
 }
 
