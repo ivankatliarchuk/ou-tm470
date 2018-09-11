@@ -19,8 +19,6 @@ import (
 	"fmt"
 	"net/http"
 	"strings"
-
-	"github.com/mmd93ee/ou-tm470/dataPersist"
 )
 
 // Core blockchain and persistent data sets
@@ -101,7 +99,7 @@ func main() {
 }
 
 func loadBlockchain() error {
-	err := dataPersist.Load(persistentFilename, blockchain)
+	err := fileToInterface(persistentFilename, blockchain)
 	if err != nil {
 		// Problem with lack of data file, lets create a genesis and return err
 		log.Println("INFO: loadBlockchain(): Loading blockchain failed, generating Genesis.  " + err.Error())
@@ -124,7 +122,7 @@ func loadBlockchain() error {
 func saveBlockchain() error {
 	log.Println("INFO: serviceChain.saveBlockchain(): Persisting blockchain as " + persistentFilename)
 
-	return dataPersist.Save(persistentFilename, blockchain)
+	return Save(persistentFilename, blockchain)
 }
 
 // Generate a new block based on the old block and new payload
@@ -152,20 +150,20 @@ func generateNewBlock(oldBlock Block, dataPayload string) (Block, error) {
 // Load Garages, Vehicles and Events in order to provide baseline data sets
 func loadBaseData() error {
 
-	err := dataPersist.Load(validGarageDataFile, validGarages)
+	err := fileToInterface(validGarageDataFile, validGarages)
 
 	if err != nil {
 		log.Println("ERROR: Unable to load valid garage data")
 		return err
 	}
 
-	err = dataPersist.Load(validVehicleDataFile, validVehicles)
+	err = fileToInterface(validVehicleDataFile, validVehicles)
 	if err != nil {
 		log.Println("ERROR: Unable to load valid vehicles data")
 		return err
 	}
 
-	err = dataPersist.Load(validEventDataFile, validEvents)
+	err = fileToInterface(validEventDataFile, validEvents)
 	if err != nil {
 		log.Println("ERROR: Unable to load valid events data")
 		return err
@@ -347,7 +345,7 @@ func Save(path string, structIn interface{}) error {
 }
 
 // Load is used to convert a JSON (marshall output formatted) file to a struct (interface)
-func Load(path string, structOut interface{}) error {
+func fileToInterface(path string, structOut interface{}) error {
 
 	// Lock and defer the unlock until function exit
 	lock.Lock()
@@ -358,13 +356,13 @@ func Load(path string, structOut interface{}) error {
 
 	// DEPRECATED - PERSISTENT FILE WILL ALWAYS exist
 	/*	if !os.IsNotExist(err) { // Check if it does not exist or if it is a real error
-			log.Println("INFO: dataPersist.Load(): File does not exist.")
+			log.Println("INFO: dataPersist.fileToInterface(): File does not exist.")
 			return nil
 		}
 	*/
 
 	if err != nil {
-		log.Println("ERROR: dataPersist.Load() " + err.Error() + " while openning file " + path)
+		log.Println("ERROR: fileToInterface() " + err.Error() + " while openning file " + path)
 		return err
 	}
 
