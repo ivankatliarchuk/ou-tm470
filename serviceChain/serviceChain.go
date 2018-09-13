@@ -277,7 +277,8 @@ func replaceChain(newBlock Block) bool {
 	// Is the block valid and if so then append it to the chain
 	if isBlockValid(newBlock, Blockchain[len(Blockchain)-1]) {
 		Blockchain = append(Blockchain, newBlock)
-		log.Printf("Added new block with ID %s", string(Blockchain[len(Blockchain)-1].Index))
+		newLength := string(Blockchain[len(Blockchain)-1].Index)
+		log.Printf("Added new block with ID %s", newLength)
 		return true
 	}
 	return false
