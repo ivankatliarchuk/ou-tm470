@@ -256,14 +256,14 @@ func generateBlock(priorBlock Block, event ServiceEvent) (Block, error) {
 
 	// New block and values
 	var b Block
-	log.Printf("Previous BLock ID: %s", string(priorBlock.Index))
+	log.Printf("Previous Block ID: %s", strconv.Itoa(priorBlock.Index))
 	b.Index = priorBlock.Index + 1
 	b.PrevHash = priorBlock.Hash
 	b.Event = event
 	b.Timestamp = time.Now().String()
 	b.Hash = calculateHash(b)
 
-	log.Printf("INFO: Created new block with Index %s, hash %s at %s from eventID %s", string(b.Index), string(b.Hash), string(b.Timestamp), string(b.Event.Identifier))
+	log.Printf("INFO: Created new block with Index %s, hash %s at %s from eventID %s", string(b.Index), string(b.Hash), string(b.Timestamp), strconv.Itoa(b.Event.Identifier))
 	return b, nil
 }
 
@@ -280,7 +280,7 @@ func replaceChain(newBlock Block) bool {
 		Blockchain = append(Blockchain, newBlock)
 		BlockchainLength = len(Blockchain)
 
-		log.Printf("INFO: Appended new block, writing to disk")
+		log.Printf("INFO: Appended new block, writing to disk with ID %s", strconv.Itoa(BlockchainLength))
 		err := interfaceToFile("./saved_chains/md5589_blockchain_"+strconv.Itoa(BlockchainLength), Blockchain)
 		if err != nil {
 			log.Printf("ERROR: Unable to write blockchain to disk: %s", strconv.Itoa(BlockchainLength))
