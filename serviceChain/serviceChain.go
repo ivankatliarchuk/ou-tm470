@@ -256,14 +256,14 @@ func generateBlock(priorBlock Block, event ServiceEvent) (Block, error) {
 
 	// New block and values
 	var b Block
-	log.Printf("Previous Block ID: %s", strconv.Itoa(priorBlock.Index))
+	log.Printf("INFO: Creating new block with previous Block ID set to: %s", strconv.Itoa(priorBlock.Index))
 	b.Index = priorBlock.Index + 1
 	b.PrevHash = priorBlock.Hash
 	b.Event = event
 	b.Timestamp = time.Now().String()
 	b.Hash = calculateHash(b)
 
-	log.Printf("INFO: Created new block with Index %s, hash %s at %s from eventID %s", string(b.Index), string(b.Hash), string(b.Timestamp), strconv.Itoa(b.Event.Identifier))
+	log.Printf("INFO: Created new block with Index %s, hash %s at %s from eventID %s", strconv.Itoa(b.Index), string(b.Hash), string(b.Timestamp), strconv.Itoa(b.Event.Identifier))
 	return b, nil
 }
 
