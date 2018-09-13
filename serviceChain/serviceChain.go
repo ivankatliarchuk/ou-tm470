@@ -279,7 +279,12 @@ func replaceChain(newBlock Block) bool {
 	if isBlockValid(newBlock, Blockchain[len(Blockchain)-1]) {
 		Blockchain = append(Blockchain, newBlock)
 		BlockchainLength = len(Blockchain)
-		log.Printf("INFO: Appended new block")
+
+		log.Printf("INFO: Appended new block, writing to disk")
+		err := interfaceToFile("md5589_blockchain_"+strconv.Itoa(BlockchainLength), Blockchain)
+		if err != nil {
+			log.Printf("ERROR: Unable to write blockchain to disk: %s", "md5589_blockchain_"+strconv.Itoa(BlockchainLength))
+		}
 		return true
 	}
 	return false
