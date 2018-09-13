@@ -263,6 +263,7 @@ func generateBlock(priorBlock Block, event ServiceEvent) (Block, error) {
 	b.Timestamp = time.Now().String()
 	b.Hash = calculateHash(b)
 
+	log.Printf("INFO: Created new block with Index %s, hash %s at %s", string(b.Index), string(b.Hash), string(b.Timestamp))
 	return b, nil
 }
 

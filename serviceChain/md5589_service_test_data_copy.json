@@ -1,4 +1,5 @@
-	{
+{
+		  "Event" : {
 			"Identifier" : 3,
 			"EventDetails" : {
 				"EventItem" : [
@@ -29,4 +30,4 @@
 				"Type": "Main Dealer"
 			}
 		}
-	
+	}
