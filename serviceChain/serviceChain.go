@@ -310,18 +310,19 @@ func defaultHandler(w http.ResponseWriter, r *http.Request) {
 func writeServiceEventHandler(w http.ResponseWriter, r *http.Request) {
 
 	var newServiceEvent ServiceEvent
-
 	decoder := json.NewDecoder(r.Body)
 
 	if err := decoder.Decode(&newServiceEvent); err != nil {
+		log.Printf("ERROR: Unable to decode data payload: %s", err.Error())
 		http.Error(w, "ERROR: Unable to decode data payload: "+err.Error(), 400)
+		r.Body.Close()
+
 		return
 	}
 
 	dataPayload, _ := json.MarshalIndent(&newServiceEvent, " ", "  ")
 	log.Printf("Data Payload being written: %s", dataPayload)
-
-	defer r.Body.Close()
+	r.Body.Close()
 
 	// Generate block
 	newBlock, err := generateBlock(Blockchain[len(Blockchain)-1], newServiceEvent)
