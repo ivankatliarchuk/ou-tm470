@@ -108,8 +108,7 @@ func loadBlockchain() error {
 		// Problem with lack of data file, lets create a genesis and return err
 		log.Println("INFO: loadBlockchain(): Loading Blockchain failed, generating Genesis.  " + err.Error())
 		Blockchain = append(Blockchain, generateGenesisBlock())
-		blockchainSize := strconv.Itoa(len(Blockchain))
-		log.Println("INFO: serviceChain.loadBlockchain(): Created genesis and added to Blockchain, now of size " + blockchainSize)
+		log.Printf("INFO: serviceChain.loadBlockchain(): Created genesis and added to Blockchain, now of size %s", string(len(Blockchain)))
 		return nil
 	}
 	blockchainSize := strconv.Itoa(len(Blockchain))
