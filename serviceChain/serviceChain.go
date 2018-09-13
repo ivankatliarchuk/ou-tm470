@@ -253,6 +253,36 @@ func generateGenesisBlock() Block {
 	return genesisBlock
 }
 
+func generateBlock(priorBlock Block, event ServiceEvent) (Block, error) {
+
+	// New block and values
+	var b Block
+	b.Index = priorBlock.Index + 1
+	b.PrevHash = priorBlock.Hash
+	b.Event = event
+	b.Timestamp = time.Now().String()
+	b.Hash = calculateHash(b)
+
+	return b, nil
+}
+
+// Perform tests to validate if a specific block is valid by comparing it to its own values
+func isBlockValid(prior Block, current Block) bool {
+	return true
+}
+
+// Replace the current chain by adding a new block
+func replaceChain(newBlock Block) bool {
+
+	// Is the block valid and if so then append it to the chain
+	if isBlockValid(newBlock, Blockchain[len(Blockchain)-1]) {
+		Blockchain = append(Blockchain, newBlock)
+		log.Printf("Added new block with ID %s to Blockchain, new length %s", string(newBlock.Index), string(len(Blockchain)))
+		return true
+	}
+	return false
+}
+
 // ServerStart starts the web server on the specified TCP port.  Blank will default to 8000.
 func ServerStart(port string) (string, error) {
 
@@ -267,6 +297,29 @@ func ServerStart(port string) (string, error) {
 // Default handler to catch-all
 func defaultHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Default Handler called from %s.  Please try alternative methods such as /blockchain/view/<id> or /garage/view/<id>", r.RemoteAddr)
+}
+
+func writeBlockchainHandler(w http.ResponseWriter, r *http.Request) {
+
+	var newServiceEvent ServiceEvent
+
+	decoder := json.NewDecoder(r.Body)
+	if err := decoder.Decode(&newServiceEvent); err != nil {
+		http.Error(w, "ERROR: Unable to decode data payload: "+err.Error(), 400)
+		return
+	}
+	defer r.Body.Close()
+
+	// Generate block
+	newBlock, err := generateBlock(Blockchain[len(Blockchain)-1], newServiceEvent)
+	if err != nil {
+		http.Error(w, "ERROR: Unable to generate new block: "+err.Error(), 400)
+		return
+	}
+	result := replaceChain(newBlock)
+	if result {
+		http.StatusText(200)
+	}
 }
 
 // Handler to manage requests to /blockchain/ subchain
