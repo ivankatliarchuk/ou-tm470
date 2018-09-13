@@ -23,6 +23,7 @@ import (
 
 // Core Blockchain and persistent data sets
 var Blockchain []Block
+var BlockchainLength int
 var ValidGarages []Garage
 var ValidVehicles []Vehicle
 var ValidEvents []EventType
@@ -277,8 +278,8 @@ func replaceChain(newBlock Block) bool {
 	// Is the block valid and if so then append it to the chain
 	if isBlockValid(newBlock, Blockchain[len(Blockchain)-1]) {
 		Blockchain = append(Blockchain, newBlock)
-		newLength := string(Blockchain[len(Blockchain)-1].Index)
-		log.Printf("Added new block with ID %s", newLength)
+		BlockchainLength = len(Blockchain)
+		log.Printf("INFO: Appended new block")
 		return true
 	}
 	return false
