@@ -289,6 +289,8 @@ func ServerStart(port string) (string, error) {
 	http.HandleFunc("/", defaultHandler) // Each call to "/" will invoke defaultHandler
 	http.HandleFunc("/blockchain/view/", blockchainViewHandler)
 	http.HandleFunc("/garage/view/", garageViewHandler)
+	http.HandleFunc("/serviceevent/add", writeServiceEventHandler)
+
 	//log.Fatal(http.ListenAndServe("localhost:"+port, nil))
 	return "Started on: " + port, http.ListenAndServe("localhost:"+port, nil)
 
@@ -299,7 +301,7 @@ func defaultHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Default Handler called from %s.  Please try alternative methods such as /blockchain/view/<id> or /garage/view/<id>", r.RemoteAddr)
 }
 
-func writeBlockchainHandler(w http.ResponseWriter, r *http.Request) {
+func writeServiceEventHandler(w http.ResponseWriter, r *http.Request) {
 
 	var newServiceEvent ServiceEvent
 
