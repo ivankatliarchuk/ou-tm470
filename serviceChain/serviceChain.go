@@ -298,15 +298,14 @@ func ServerStart(port string) (string, error) {
 
 // Default handler to catch-all
 func defaultHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Default Handler called from %s.  Please try alternative methods such as /blockchain/view/<id> or /garage/view/<id>", r.RemoteAddr)
+	fmt.Fprintf(w, "INFO: Default Handler called from %s.  Please try alternative methods such as /blockchain/view/<id> or /garage/view/<id>", r.RemoteAddr)
 }
 
 func writeServiceEventHandler(w http.ResponseWriter, r *http.Request) {
 
 	var newServiceEvent ServiceEvent
-	decoder := json.NewDecoder(r.Body)
 
-	if err := decoder.Decode(&newServiceEvent); err != nil {
+	if err := json.NewDecoder(r.Body).Decode(&newServiceEvent); err != nil {
 		log.Printf("ERROR: Unable to decode data payload: %s", err.Error())
 		http.Error(w, "ERROR: Unable to decode data payload: "+err.Error(), 400)
 		r.Body.Close()
