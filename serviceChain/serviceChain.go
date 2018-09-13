@@ -230,7 +230,7 @@ func generateGenesisBlock() Block {
 	// Pull all the objects into ServiceEvent
 	genesisRecord.EventAuthorisor = "Created by serviceChain as the Genesis Block"
 	genesisRecord.EventDetails = genesisRecordEventDescription
-	genesisRecord.Identifier = 0
+	genesisRecord.Identifier = 1
 	genesisRecord.PerformedBy = genesisRecordGarage
 	genesisRecord.PerformedOnVehicle = genesisRecordVehicle
 
@@ -337,7 +337,7 @@ func blockchainViewHandler(w http.ResponseWriter, r *http.Request) {
 	requestAction := strings.Split(r.URL.String(), "/")
 	requestItem, err := strconv.Atoi(requestAction[3])
 	if err != nil {
-		log.Println("ERROR: Unable to convert argument to integer" + err.Error())
+		log.Println("INFO: Unable to convert argument to integer, assume this is a request for entire chain")
 	}
 
 	if requestItem == 0 { //Request item is invalid so display that blockID only
