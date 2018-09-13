@@ -311,7 +311,9 @@ func writeServiceEventHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	log.Println(json.MarshalIndent(newServiceEvent, " ", " "))
+	dataPayload, _ := json.MarshalIndent(&newServiceEvent, "", "  ")
+	log.Printf("Data Payload being written: %s", dataPayload)
+
 	defer r.Body.Close()
 
 	// Generate block
