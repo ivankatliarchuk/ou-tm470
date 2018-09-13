@@ -303,10 +303,10 @@ func defaultHandler(w http.ResponseWriter, r *http.Request) {
 
 func writeServiceEventHandler(w http.ResponseWriter, r *http.Request) {
 
-	var newServiceEvent ServiceEvent
+	newServiceEvent := new(ServiceEvent) // Returns a pointer
 
 	decoder := json.NewDecoder(r.Body)
-	if err := decoder.Decode(&newServiceEvent); err != nil {
+	if err := decoder.Decode(newServiceEvent); err != nil {
 		http.Error(w, "ERROR: Unable to decode data payload: "+err.Error(), 400)
 		return
 	}
@@ -317,7 +317,7 @@ func writeServiceEventHandler(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 
 	// Generate block
-	newBlock, err := generateBlock(Blockchain[len(Blockchain)-1], newServiceEvent)
+	newBlock, err := generateBlock(Blockchain[len(Blockchain)-1], *newServiceEvent)
 	if err != nil {
 		http.Error(w, "ERROR: Unable to generate new block: "+err.Error(), 400)
 		return
