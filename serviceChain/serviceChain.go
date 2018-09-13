@@ -310,15 +310,15 @@ func defaultHandler(w http.ResponseWriter, r *http.Request) {
 func writeServiceEventHandler(w http.ResponseWriter, r *http.Request) {
 
 	var newServiceEvent ServiceEvent
-	r.ParseForm()
 
 	decoder := json.NewDecoder(r.Body)
+
 	if err := decoder.Decode(&newServiceEvent); err != nil {
 		http.Error(w, "ERROR: Unable to decode data payload: "+err.Error(), 400)
 		return
 	}
 
-	dataPayload, _ := json.MarshalIndent(&newServiceEvent, "", "  ")
+	dataPayload, _ := json.MarshalIndent(&newServiceEvent, " ", "  ")
 	log.Printf("Data Payload being written: %s", dataPayload)
 
 	defer r.Body.Close()
