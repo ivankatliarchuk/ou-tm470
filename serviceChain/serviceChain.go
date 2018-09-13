@@ -311,7 +311,7 @@ func writeServiceEventHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	log.Println(decoder)
+	log.Println(decoder.Decode(&newServiceEvent))
 	defer r.Body.Close()
 
 	// Generate block
