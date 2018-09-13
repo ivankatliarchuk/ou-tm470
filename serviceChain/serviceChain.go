@@ -46,12 +46,6 @@ type Block struct {
 	Event     ServiceEvent // The Service Record
 }
 
-// Test struct for web handler for writing to JSON
-type testStruct struct {
-	Identifier int
-	Payload    string
-}
-
 // ServiceRecord to represent the service record data itself
 type ServiceEvent struct {
 	Identifier         int
@@ -104,7 +98,7 @@ func main() {
 		log.Fatalln(err)
 	}
 
-	log.Println("INFO: serviceChain.main(): Starting web server...") // Web Server for blockchain interaction
+	log.Println("INFO: serviceChain.main(): Starting web server (port 8000)...") // Web Server for blockchain interaction
 	ServerStart("8000")
 }
 
@@ -295,7 +289,7 @@ func ServerStart(port string) (string, error) {
 	http.HandleFunc("/", defaultHandler) // Each call to "/" will invoke defaultHandler
 	http.HandleFunc("/blockchain/view/", blockchainViewHandler)
 	http.HandleFunc("/garage/view/", garageViewHandler)
-	http.HandleFunc("/serviceevent/add", writeServiceEventHandler)
+	http.HandleFunc("/serviceevent/add/", writeServiceEventHandler)
 
 	//log.Fatal(http.ListenAndServe("localhost:"+port, nil))
 	return "Started on: " + port, http.ListenAndServe("localhost:"+port, nil)
@@ -321,7 +315,7 @@ func writeServiceEventHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	dataPayload, _ := json.MarshalIndent(&newServiceEvent, " ", "  ")
-	log.Printf("Data Payload being written: %s", dataPayload)
+	log.Printf("INFO: Data Payload being written: %s", dataPayload)
 	r.Body.Close()
 
 	// Generate block
