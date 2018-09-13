@@ -257,6 +257,7 @@ func generateBlock(priorBlock Block, event ServiceEvent) (Block, error) {
 
 	// New block and values
 	var b Block
+	log.Printf("Previous BLock ID: %s", string(priorBlock.Index))
 	b.Index = priorBlock.Index + 1
 	b.PrevHash = priorBlock.Hash
 	b.Event = event
