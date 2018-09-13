@@ -281,7 +281,7 @@ func replaceChain(newBlock Block) bool {
 		BlockchainLength = len(Blockchain)
 
 		log.Printf("INFO: Appended new block, writing to disk")
-		err := interfaceToFile("md5589_blockchain_"+strconv.Itoa(BlockchainLength), Blockchain)
+		err := interfaceToFile("./saved_chains/md5589_blockchain_"+strconv.Itoa(BlockchainLength), Blockchain)
 		if err != nil {
 			log.Printf("ERROR: Unable to write blockchain to disk: %s", strconv.Itoa(BlockchainLength))
 		}
