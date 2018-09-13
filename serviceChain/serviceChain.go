@@ -335,7 +335,7 @@ func blockchainViewHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Take the URL beyond /blockchain/ and split into request and value strings
 	requestAction := strings.Split(r.URL.String(), "/")
-	requestItem, err := strconv.Atoi(requestAction[3])
+	requestItem, err := strconv.Atoi(requestAction[3] - 1)
 	if err != nil {
 		log.Println("INFO: Unable to convert argument to integer, assume this is a request for entire chain")
 	}
