@@ -305,13 +305,12 @@ func writeServiceEventHandler(w http.ResponseWriter, r *http.Request) {
 
 	var newServiceEvent ServiceEvent
 
-	err := json.NewDecoder(r.Body).Decode(&newServiceEvent)
-	/*if err := decoder.Decode(&newServiceEvent); err != nil {
+	decoder := json.NewDecoder(r.Body)
+	if err := decoder.Decode(newServiceEvent); err != nil {
 		http.Error(w, "ERROR: Unable to decode data payload: "+err.Error(), 400)
 		return
 	}
-	*/
-	log.Println(err)
+
 	defer r.Body.Close()
 
 	// Generate block
