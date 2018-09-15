@@ -305,11 +305,12 @@ func replaceChain(newBlock Block) bool {
 		} else {
 			newBlockSlice := []int{newBlock.Index}
 			// vehicleMap not initialised so set it up
-			if len(vehicleMap) == 0 {
+			if len(vehicleMap) < 1 {
+				log.Printf("INFO: replaceChain(): vehicleMap is not initialised, size is %s", strconv.Itoa(len(vehicleMap)))
 				vehicleMap = make(map[string][]int)
 			}
-
 			// Add the new vehicle to the map
+			log.Printf("INFO: replaceChain(): Adding vehicle %s to new vehicleMap", registration)
 			vehicleMap[registration] = newBlockSlice
 		}
 
