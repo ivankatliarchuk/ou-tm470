@@ -311,6 +311,7 @@ func ServerStart(port string) (string, error) {
 	http.HandleFunc("/blockchain/view/", blockchainViewHandler)
 	http.HandleFunc("/garage/view/", garageViewHandler)
 	http.HandleFunc("/serviceevent/add/", writeServiceEventHandler)
+	http.HandleFunc("/vehicle/view/", vehicleViewHandler)
 
 	//log.Fatal(http.ListenAndServe("localhost:"+port, nil))
 	return "Started on: " + port, http.ListenAndServe("localhost:"+port, nil)
@@ -397,6 +398,17 @@ func garageViewHandler(w http.ResponseWriter, r *http.Request) {
 		garageString, _ := json.MarshalIndent(ValidGarages[requestItem], "", "\t") // Do nothing if index too high
 		fmt.Fprintf(w, "\n %s.", garageString)
 	}
+}
+
+func vehicleViewHandler(w http.ResponseWriter, r *http.Request) {
+
+	// Take the URL beyond /vehicle/ and split into request and value strings
+	requestAction := strings.Split(r.URL.String(), "/")
+	requestReg := requestAction[3]
+
+	blockItemStringJSON, _ := json.MarshalIndent(vehicleMap[requestReg], "", "\t") // Do nothing if index too high
+	vehicleBlockString := fmt.Sprintf("Block locations for vehicle %s: %s", requestReg, blockItemStringJSON)
+	fmt.Fprintf(w, "\n %s.", vehicleBlockString)
 }
 
 /*
