@@ -28,6 +28,7 @@ var ValidGarages []Garage
 var ValidVehicles []Vehicle
 var ValidEvents []EventType
 var vehicleMap map[string][]int
+var handlerStrings []string
 var filewritelock sync.Mutex
 var blockchainwritelock sync.Mutex
 
@@ -328,6 +329,7 @@ func replaceChain(newBlock Block) bool {
 func ServerStart(port string) (string, error) {
 
 	// List of view handlers
+	handlerStrings = append(handlerStrings, "/", "/blockchain/view/<ID>", "/garage/view/<ID>", "serviceevent/add/", "/vehicle/view/<ID>")
 
 	http.HandleFunc("/", defaultHandler) // Each call to "/" will invoke defaultHandler
 	http.HandleFunc("/blockchain/view/", blockchainViewHandler)
@@ -342,7 +344,7 @@ func ServerStart(port string) (string, error) {
 
 // Default handler to catch-all
 func defaultHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "INFO: Default Handler called from %s.  Please try alternative methods such as /blockchain/view/<id> or /garage/view/<id>", r.RemoteAddr)
+	fmt.Fprintf(w, "INFO: Default Handler called from %s.  Please try alternative methods such as \n %s", r.RemoteAddr, handlerStrings)
 }
 
 func writeServiceEventHandler(w http.ResponseWriter, r *http.Request) {
