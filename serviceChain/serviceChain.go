@@ -28,7 +28,8 @@ var ValidGarages []Garage
 var ValidVehicles []Vehicle
 var ValidEvents []EventType
 var vehicleMap map[string][]int
-var lock sync.Mutex
+var filewritelock sync.Mutex
+var blockchainwritelock sync.Mutex
 
 // Data files and persistence variables
 var persistentFilename = "./md5589_blockchain"      // What to persist the blockchain to disk as
@@ -276,6 +277,10 @@ func isBlockValid(prior Block, current Block) bool {
 // Replace the current chain by adding a new block
 func replaceChain(newBlock Block) bool {
 
+	// make this thread safe
+	blockchainwritelock.Lock()
+	defer blockchainwritelock.Unlock()
+
 	// Is the block valid and if so then append it to the chain
 	if isBlockValid(newBlock, Blockchain[len(Blockchain)-1]) {
 		Blockchain = append(Blockchain, newBlock)
@@ -297,8 +302,6 @@ func replaceChain(newBlock Block) bool {
 			vehicleMap[registration] = append(blocklist, newBlock.Index)
 		} else {
 			newBlockSlice := []int{newBlock.Index}
-			log.Printf("aaa: %s", strconv.Itoa(len(newBlockSlice)))
-
 			// vehicleMap not initialised so set it up
 			if len(vehicleMap) == 0 {
 				vehicleMap = make(map[string][]int)
@@ -452,8 +455,8 @@ var Unmarshal = func(reader io.Reader, structIn interface{}) error {
 func interfaceToFile(path string, structIn interface{}) error {
 
 	// Create a lock and then defer the unlock until function exit
-	lock.Lock()
-	defer lock.Unlock()
+	filewritelock.Lock()
+	defer filewritelock.Unlock()
 
 	//Create os.File and defer close
 	file, err := os.Create(string(path))
@@ -476,8 +479,8 @@ func interfaceToFile(path string, structIn interface{}) error {
 func fileToInterface(path string, structOut interface{}) error {
 
 	// Lock and defer the unlock until function exit
-	lock.Lock()
-	defer lock.Unlock()
+	filewritelock.Lock()
+	defer filewritelock.Unlock()
 
 	log.Println("INFO: Loading " + path)
 	fileOut, err := os.Open(path)
