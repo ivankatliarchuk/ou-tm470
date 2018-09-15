@@ -291,7 +291,7 @@ func replaceChain(newBlock Block) bool {
 		// Update vehicle lookups
 		log.Printf("INFO: replaceChain(): Adding vehicle to vehicle and blocklookup map.")
 		lastregindex := len(newBlock.Event.PerformedOnVehicle.VehicleRegistration)
-		blocklist := vehicleMap[newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastregindex-1]]
+		blocklist := vehicleMap[newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastregindex]]
 
 		registration = newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastregindex-1]
 		registration = strings.ToUpper(registration)
