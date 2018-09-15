@@ -27,6 +27,7 @@ var BlockchainLength int
 var ValidGarages []Garage
 var ValidVehicles []Vehicle
 var ValidEvents []EventType
+var vehicleMap map[string][]int
 var lock sync.Mutex
 
 // Data files and persistence variables
@@ -45,6 +46,12 @@ type Block struct {
 	Hash      string
 	PrevHash  string
 	Event     ServiceEvent // The Service Record
+}
+
+// Struct to hold vehicle details for block lookups
+type vehicleLookup struct {
+	Vehicle        Vehicle
+	BlockLocations []int
 }
 
 // ServiceRecord to represent the service record data itself
@@ -279,6 +286,13 @@ func replaceChain(newBlock Block) bool {
 	if isBlockValid(newBlock, Blockchain[len(Blockchain)-1]) {
 		Blockchain = append(Blockchain, newBlock)
 		BlockchainLength = len(Blockchain)
+
+		// Update vehicle lookups
+		lastreg := len(newBlock.Event.PerformedOnVehicle.VehicleRegistration)
+		blocklist := vehicleMap[newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastreg-1]]
+		registration := newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastreg]
+		vehicleMap[registration] = append(blocklist, newBlock.Index)
+		log.Printf("Added vehicle reg %s to block lookup table, blockid %s", registration, strconv.Itoa(newBlock.Index))
 
 		log.Printf("INFO: Appended new block, writing to disk with ID %s", strconv.Itoa(BlockchainLength))
 		err := interfaceToFile("./saved_chains/md5589_blockchain_"+strconv.Itoa(BlockchainLength), Blockchain)
