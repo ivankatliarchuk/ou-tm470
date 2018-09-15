@@ -290,7 +290,7 @@ func replaceChain(newBlock Block) bool {
 
 		// Update vehicle lookups
 		lastreg := len(newBlock.Event.PerformedOnVehicle.VehicleRegistration)
-		blocklist := vehicleMap[newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastreg-1]]
+		blocklist := vehicleMap[newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastreg]]
 		if lastreg != 0 {
 			registration = newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastreg]
 		}
