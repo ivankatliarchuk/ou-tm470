@@ -1,0 +1,32 @@
+{
+				"Identifier" : 2,
+				"EventDetails" : {
+					"EventItem" : [
+						{
+							"EventId" : 3,
+							"EventDescription" : "another type of test event"
+						}
+					],
+					"VehicleMilage": 324567897
+				},
+				"EventAuthorisor": "Created by serviceChain as a test event",
+				"PerformedOnVehicle": {
+					"V5c": "test_test_v5c_2",
+					"VehicleMake": "test make",
+					"VehicleModel": "test model",
+					"VehicleColour": [
+						"test colour"
+					],
+					"VehicleRegistration": [
+						"SN34 ABC"
+					]
+				},
+				"PerformedBy": {
+					"GarageId": 2,
+					"Owner": "A. C. Car and Sons",
+					"Name": "Second Generation Services",
+					"Location": "New Road, Littlehamption, Sussex, AN3 C45",
+					"Type": "Main Dealer"
+				}
+
+	}

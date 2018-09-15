@@ -38,23 +38,27 @@
 	},
 	{
 		"Index": 2,
-		"Timestamp": "2018-09-15 20:15:19.669672654 +0100 BST m=+105.867031236",
-		"Hash": "18e211c74497d2fbfb0295c0037a0262498d890918957b91390493b63c7577f1",
+		"Timestamp": "2018-09-15 20:23:35.498712442 +0100 BST m=+1.485576798",
+		"Hash": "ffd488c924c68b488c975d88b1a512d02e1dccce80291c03905406cea5bfdacb",
 		"PrevHash": "0",
 		"Event": {
-			"Identifier": 3,
+			"Identifier": 1,
 			"EventDetails": {
 				"EventItem": [
 					{
 						"EventId": 1,
 						"EventDescription": "test event"
+					},
+					{
+						"EventId": 2,
+						"EventDescription": "a secondary event"
 					}
 				],
 				"VehicleMilage": 123456
 			},
 			"EventAuthorisor": "Created by serviceChain as a test event",
 			"PerformedOnVehicle": {
-				"V5c": "test_test_v5c",
+				"V5c": "test_test_v5c_1",
 				"VehicleMake": "test make",
 				"VehicleModel": "test model",
 				"VehicleColour": [
@@ -75,23 +79,27 @@
 	},
 	{
 		"Index": 3,
-		"Timestamp": "2018-09-15 20:15:21.904605121 +0100 BST m=+108.101916703",
-		"Hash": "31a7fbe25d7666b4fb28412e2e604f8d9f62178876befde6d3cbddb9c7f623ac",
-		"PrevHash": "18e211c74497d2fbfb0295c0037a0262498d890918957b91390493b63c7577f1",
+		"Timestamp": "2018-09-15 20:23:38.388233307 +0100 BST m=+4.375004663",
+		"Hash": "560d2c5112ac034b5c2b781dbf4b83109eacd3c35e5545afd6c7104631f51364",
+		"PrevHash": "ffd488c924c68b488c975d88b1a512d02e1dccce80291c03905406cea5bfdacb",
 		"Event": {
-			"Identifier": 3,
+			"Identifier": 1,
 			"EventDetails": {
 				"EventItem": [
 					{
 						"EventId": 1,
 						"EventDescription": "test event"
+					},
+					{
+						"EventId": 2,
+						"EventDescription": "a secondary event"
 					}
 				],
 				"VehicleMilage": 123456
 			},
 			"EventAuthorisor": "Created by serviceChain as a test event",
 			"PerformedOnVehicle": {
-				"V5c": "test_test_v5c",
+				"V5c": "test_test_v5c_1",
 				"VehicleMake": "test make",
 				"VehicleModel": "test model",
 				"VehicleColour": [
@@ -112,23 +120,27 @@
 	},
 	{
 		"Index": 4,
-		"Timestamp": "2018-09-15 20:15:23.502818618 +0100 BST m=+109.700083200",
-		"Hash": "2c98d6f358114a39a5d69c0ac977cd70b7099fceb3f413a136efce43500e74da",
-		"PrevHash": "31a7fbe25d7666b4fb28412e2e604f8d9f62178876befde6d3cbddb9c7f623ac",
+		"Timestamp": "2018-09-15 20:23:40.35547212 +0100 BST m=+6.342196476",
+		"Hash": "aec3410e680f52cbf775c852cef1bdbb4c2e35f1b68817d25b9fc0ae3264a3e4",
+		"PrevHash": "560d2c5112ac034b5c2b781dbf4b83109eacd3c35e5545afd6c7104631f51364",
 		"Event": {
-			"Identifier": 3,
+			"Identifier": 1,
 			"EventDetails": {
 				"EventItem": [
 					{
 						"EventId": 1,
 						"EventDescription": "test event"
+					},
+					{
+						"EventId": 2,
+						"EventDescription": "a secondary event"
 					}
 				],
 				"VehicleMilage": 123456
 			},
 			"EventAuthorisor": "Created by serviceChain as a test event",
 			"PerformedOnVehicle": {
-				"V5c": "test_test_v5c",
+				"V5c": "test_test_v5c_1",
 				"VehicleMake": "test make",
 				"VehicleModel": "test model",
 				"VehicleColour": [
