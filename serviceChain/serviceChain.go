@@ -299,6 +299,7 @@ func replaceChain(newBlock Block) bool {
 			vehicleMap[registration] = append(blocklist, newBlock.Index)
 		} else {
 			newBlockSlice := []int{newBlock.Index}
+			log.Printf("aaa: %s", strconv.Itoa(len(newBlockSlice)))
 			log.Printf("nnn %s", strconv.Itoa(len(newBlockSlice)))
 			vehicleMap[registration] = newBlockSlice
 		}
