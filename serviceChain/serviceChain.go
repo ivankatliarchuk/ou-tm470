@@ -291,7 +291,7 @@ func replaceChain(newBlock Block) bool {
 		// Update vehicle lookups
 		log.Printf("INFO: replaceChain(): Adding vehicle to vehicle and blocklookup map.")
 		lastregindex := len(newBlock.Event.PerformedOnVehicle.VehicleRegistration)
-		blocklist := vehicleMap[newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastregindex]]
+		blocklist := vehicleMap[newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastregindex-1]]
 
 		registration = newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastregindex-1]
 		registration = strings.ToUpper(registration)
@@ -304,6 +304,7 @@ func replaceChain(newBlock Block) bool {
 			vehicleMap[registration] = append(blocklist, newBlock.Index)
 		} else {
 			newBlockSlice := []int{newBlock.Index}
+			log.Printf("INFO: replaceChain(): created new list of blocks for registration %s, size is %s", registration, strconv.Itoa(len(newBlockSlice)))
 			// vehicleMap not initialised so set it up
 			if len(vehicleMap) < 1 {
 				log.Printf("INFO: replaceChain(): vehicleMap is not initialised, size is %s", strconv.Itoa(len(vehicleMap)))
