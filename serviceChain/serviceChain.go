@@ -297,10 +297,10 @@ func replaceChain(newBlock Block) bool {
 		registration = strings.ToUpper(registration)
 		registration = strings.Replace(registration, " ", "", -1)
 
-		log.Printf("INFO: replaceChain(): Captured registration: %s", registration)
+		log.Printf("INFO: replaceChain(): Captured registration: %s with %s previous entries", registration, strconv.Itoa(len(blocklist)))
 
 		if (len(blocklist)) > 0 {
-			log.Printf("INFO: replaceChain(): Vehicle been added before (%s entries).", strconv.Itoa(len(blocklist)))
+			log.Printf("INFO: replaceChain(): Vehicle been added before.  Appending new block id with value %s", strconv.Itoa(newBlock.Index))
 			vehicleMap[registration] = append(blocklist, newBlock.Index)
 		} else {
 			newBlockSlice := []int{newBlock.Index}
