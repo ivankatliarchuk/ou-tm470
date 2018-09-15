@@ -302,12 +302,13 @@ func replaceChain(newBlock Block) bool {
 			log.Printf("INFO: replaceChain(): Vehicle been added before (%s entries).", strconv.Itoa(len(blocklist)))
 			vehicleMap[registration] = append(blocklist, newBlock.Index)
 		} else {
-			//			vehicleMap[registration] = []int{newBlock.Index}
+			newBlockSlice := []int{newBlock.Index}
+			vehicleMap[registration] = newBlockSlice
 		}
 
-		log.Printf("Added vehicle reg %s to block lookup table, blockid %s", registration, strconv.Itoa(newBlock.Index))
+		log.Printf("INFO: replaceChain(): Added vehicle reg %s to block lookup table, blockid %s", registration, strconv.Itoa(newBlock.Index))
 
-		log.Printf("INFO: Appended new block, writing to disk with ID %s", strconv.Itoa(BlockchainLength))
+		log.Printf("INFO: replaceChain(): Appended new block, writing to disk with ID %s", strconv.Itoa(BlockchainLength))
 		err := interfaceToFile("./saved_chains/md5589_blockchain_"+strconv.Itoa(BlockchainLength), Blockchain)
 		if err != nil {
 			log.Printf("ERROR: Unable to write blockchain to disk: %s", strconv.Itoa(BlockchainLength))
