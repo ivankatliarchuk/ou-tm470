@@ -286,11 +286,15 @@ func replaceChain(newBlock Block) bool {
 	if isBlockValid(newBlock, Blockchain[len(Blockchain)-1]) {
 		Blockchain = append(Blockchain, newBlock)
 		BlockchainLength = len(Blockchain)
+		var registration string
 
 		// Update vehicle lookups
 		lastreg := len(newBlock.Event.PerformedOnVehicle.VehicleRegistration)
 		blocklist := vehicleMap[newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastreg-1]]
-		registration := newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastreg]
+		if lastreg != 0 {
+			registration = newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastreg]
+		}
+
 		vehicleMap[registration] = append(blocklist, newBlock.Index)
 		log.Printf("Added vehicle reg %s to block lookup table, blockid %s", registration, strconv.Itoa(newBlock.Index))
 
