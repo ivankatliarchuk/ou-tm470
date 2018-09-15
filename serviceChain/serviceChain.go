@@ -294,8 +294,8 @@ func replaceChain(newBlock Block) bool {
 		blocklist := vehicleMap[newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastregindex-1]]
 
 		registration = newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastregindex-1]
-		strings.ToUpper(registration)
-		strings.Replace(registration, " ", "", -1)
+		registration = strings.ToUpper(registration)
+		registration = strings.Replace(registration, " ", "", -1)
 
 		log.Printf("INFO: replaceChain(): Captured registration: %s", registration)
 
@@ -429,6 +429,7 @@ func vehicleViewHandler(w http.ResponseWriter, r *http.Request) {
 	// Take the URL beyond /vehicle/ and split into request and value strings
 	requestAction := strings.Split(r.URL.String(), "/")
 	requestReg := requestAction[3]
+	requestReg = strings.ToUpper(requestReg)
 
 	blockItemStringJSON, _ := json.MarshalIndent(vehicleMap[requestReg], "", "\t") // Do nothing if index too high
 	vehicleBlockString := fmt.Sprintf("Block locations for vehicle %s: %s", requestReg, blockItemStringJSON)
