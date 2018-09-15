@@ -300,8 +300,7 @@ func replaceChain(newBlock Block) bool {
 		} else {
 			newBlockSlice := []int{newBlock.Index}
 			log.Printf("aaa: %s", strconv.Itoa(len(newBlockSlice)))
-			log.Printf("nnn %s", strconv.Itoa(len(newBlockSlice)))
-			vehicleMap[registration] = newBlockSlice
+			//vehicleMap[registration] = newBlockSlice
 		}
 
 		log.Printf("INFO: replaceChain(): Added vehicle reg %s to block lookup table, blockid %s", registration, strconv.Itoa(newBlock.Index))
