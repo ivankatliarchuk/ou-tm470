@@ -289,16 +289,20 @@ func replaceChain(newBlock Block) bool {
 		var registration string
 
 		// Update vehicle lookups
+		log.Printf("INFO: replaceChain(): Adding vehicle to vehicle and blocklookup map.")
 		lastregindex := len(newBlock.Event.PerformedOnVehicle.VehicleRegistration)
 		blocklist := vehicleMap[newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastregindex-1]]
-
-		log.Printf("INFO: replaceChain(): Trying to see if vehicle added before...")
 
 		//if len(blocklist) > 0 {
 		registration = newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastregindex-1]
 		//}
+		if (len(blocklist)) > 0 {
+			log.Printf("INFO: replaceChain(): Vehicle been added before (%s entries).", strconv.Itoa(len(blocklist)))
+			vehicleMap[registration] = append(blocklist, newBlock.Index)
+		} else {
+			vehicleMap[registration] = []int{newBlock.Index}
+		}
 
-		vehicleMap[registration] = append(blocklist, newBlock.Index)
 		log.Printf("Added vehicle reg %s to block lookup table, blockid %s", registration, strconv.Itoa(newBlock.Index))
 
 		log.Printf("INFO: Appended new block, writing to disk with ID %s", strconv.Itoa(BlockchainLength))
