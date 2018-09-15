@@ -290,6 +290,7 @@ func replaceChain(newBlock Block) bool {
 
 		// Update vehicle lookups
 		lastreg := len(newBlock.Event.PerformedOnVehicle.VehicleRegistration)
+		log.Printf("INFO: replaceChain(): adding new block for vehicle %s", lastreg)
 		blocklist := vehicleMap[newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastreg]]
 		if lastreg != 0 {
 			registration = newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastreg]
@@ -332,8 +333,8 @@ func writeServiceEventHandler(w http.ResponseWriter, r *http.Request) {
 	var newServiceEvent ServiceEvent
 
 	if err := json.NewDecoder(r.Body).Decode(&newServiceEvent); err != nil {
-		log.Printf("ERROR: Unable to decode data payload: %s", err.Error())
-		http.Error(w, "ERROR: Unable to decode data payload: "+err.Error(), 400)
+		log.Printf("ERROR: writeServiceEventHandler(): Unable to decode data payload: %s", err.Error())
+		http.Error(w, "ERROR: writeServiceEventHandler(): Unable to decode data payload: "+err.Error(), 400)
 		r.Body.Close()
 
 		return
@@ -346,7 +347,7 @@ func writeServiceEventHandler(w http.ResponseWriter, r *http.Request) {
 	// Generate block
 	newBlock, err := generateBlock(Blockchain[len(Blockchain)-1], newServiceEvent)
 	if err != nil {
-		http.Error(w, "ERROR: Unable to generate new block: "+err.Error(), 400)
+		http.Error(w, "ERROR: writeServiceEventHandler(): Unable to generate new block: "+err.Error(), 400)
 		return
 	}
 
@@ -371,7 +372,7 @@ func blockchainViewHandler(w http.ResponseWriter, r *http.Request) {
 	if requestItem == -1 { //Request item is invalid so display that blockID only
 		blockString, err := json.MarshalIndent(Blockchain, "", "\t")
 		if err != nil {
-			log.Println("ERROR: Cannot print Blockchain")
+			log.Println("ERROR: blockchainViewHandler(): Cannot print Blockchain")
 		}
 		fmt.Fprintf(w, "\n %s", blockString)
 	} else {
