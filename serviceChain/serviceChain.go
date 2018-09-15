@@ -48,12 +48,6 @@ type Block struct {
 	Event     ServiceEvent // The Service Record
 }
 
-// Struct to hold vehicle details for block lookups
-type vehicleLookup struct {
-	Vehicle        Vehicle
-	BlockLocations []int
-}
-
 // ServiceRecord to represent the service record data itself
 type ServiceEvent struct {
 	Identifier         int
@@ -208,6 +202,8 @@ func calculateHash(block Block) string {
 
 // generateGenesisBlock will create the first block
 func generateGenesisBlock() Block {
+
+	vehicleMap = make(map[string][]int)
 
 	var genesisBlock Block
 	var genesisRecord ServiceEvent
