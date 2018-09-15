@@ -293,9 +293,9 @@ func replaceChain(newBlock Block) bool {
 		lastregindex := len(newBlock.Event.PerformedOnVehicle.VehicleRegistration)
 		blocklist := vehicleMap[newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastregindex-1]]
 
-		//if len(blocklist) > 0 {
 		registration = newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastregindex-1]
-		//}
+		log.Printf("INFO: replaceChain(): Captured registration: %s", registration)
+
 		if (len(blocklist)) > 0 {
 			log.Printf("INFO: replaceChain(): Vehicle been added before (%s entries).", strconv.Itoa(len(blocklist)))
 			vehicleMap[registration] = append(blocklist, newBlock.Index)
