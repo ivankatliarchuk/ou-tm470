@@ -10,7 +10,7 @@ import (
 	"sync"
 )
 
-var lock sync.Mutex
+var lock sync.Mutex // Used to synchronise WRITE activities
 
 // Marshal interface to JSON for writing out to file
 var Marshal = func(structIn interface{}) (io.Reader, error) {
@@ -24,7 +24,6 @@ var Marshal = func(structIn interface{}) (io.Reader, error) {
 
 // Unmarshal interface for converting file to struct
 var Unmarshal = func(reader io.Reader, structIn interface{}) error {
-	log.Println("This far??")
 	return json.NewDecoder(reader).Decode(structIn)
 }
 
