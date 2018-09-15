@@ -294,6 +294,7 @@ func replaceChain(newBlock Block) bool {
 
 		registration = newBlock.Event.PerformedOnVehicle.VehicleRegistration[lastregindex-1]
 		strings.ToUpper(registration)
+		strings.Replace(registration, " ", "", -1)
 
 		log.Printf("INFO: replaceChain(): Captured registration: %s", registration)
 
@@ -325,6 +326,8 @@ func replaceChain(newBlock Block) bool {
 
 // ServerStart starts the web server on the specified TCP port.  Blank will default to 8000.
 func ServerStart(port string) (string, error) {
+
+	// List of view handlers
 
 	http.HandleFunc("/", defaultHandler) // Each call to "/" will invoke defaultHandler
 	http.HandleFunc("/blockchain/view/", blockchainViewHandler)
