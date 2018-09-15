@@ -203,8 +203,6 @@ func calculateHash(block Block) string {
 // generateGenesisBlock will create the first block
 func generateGenesisBlock() Block {
 
-	vehicleMap = make(map[string][]int)
-
 	var genesisBlock Block
 	var genesisRecord ServiceEvent
 	var genesisRecordEventDescription EventDescription
@@ -300,7 +298,14 @@ func replaceChain(newBlock Block) bool {
 		} else {
 			newBlockSlice := []int{newBlock.Index}
 			log.Printf("aaa: %s", strconv.Itoa(len(newBlockSlice)))
-			//vehicleMap[registration] = newBlockSlice
+
+			// vehicleMap not initialised so set it up
+			if len(vehicleMap) == 0 {
+				vehicleMap = make(map[string][]int)
+			}
+
+			// Add the new vehicle to the map
+			vehicleMap[registration] = newBlockSlice
 		}
 
 		log.Printf("INFO: replaceChain(): Added vehicle reg %s to block lookup table, blockid %s", registration, strconv.Itoa(newBlock.Index))
